@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-legado-primary: #0F2027;
+  --color-legado-secondary: #2C5364;
+  --color-legado-accent: #10B981;
+  --color-legado-gold: #D4AF37;
+  --color-legado-bg: #F8FAFC;
+  --color-legado-text: #1E293B;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-legado-bg);
+    color: var(--color-legado-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}

@@ -1,5 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
+import InquebravelSection from "@/components/InquebravelSection";
 import RegisterForm from "@/components/RegisterForm";
 import ShareSection from "@/components/ShareSection";
 import Link from "next/link";
@@ -31,6 +32,7 @@ export default function Home() {
       <div className="pt-16">
         <HeroSection />
         <FeaturesSection />
+        <InquebravelSection />
         <RegisterForm />
         <ShareSection />
       </div>
