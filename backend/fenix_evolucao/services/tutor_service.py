@@ -6,34 +6,39 @@ from typing import Tuple
 # para uma instância local do Ollama (ex: llama3 ou mistral) ou OpenAI API.
 
 BASE_KNOWLEDGE = {
+    "acolhimento_emergencia": [
+        "socorro", "ajuda", "medo", "ele me bateu", "ameaça", "matar", "fugir", "proteção", "desespero", "agredida"
+    ],
     "prevencao_violencia": [
-        "violência", "agress", "bater", "castigo físico", "gritar", "punição",
-        "bater", "palmada"
+        "violência", "agressão", "bater", "castigo físico", "gritar", "punição", "bater", "palmada"
     ],
     "inteligencia_emocional": [
-        "choro", "birra", "triste", "frustra", "raiva", "chateado", "ansiedade",
-        "medo", "emoção", "sentimento", "não quer", "teimoso"
+        "choro", "birra", "triste", "frustra", "raiva", "chateado", "ansiedade", "emoção", "sentimento", "não quer"
     ]
 }
 
 RESPOSTAS = {
+    "acolhimento_emergencia": (
+        "Eu estou aqui com você e você não está mais sozinha. "
+        "A violência que você sofreu não é culpa sua. A prioridade agora é a sua segurança física. "
+        "Se você estiver em perigo imediato, use o botão SOS na tela inicial para enviar sua localização. "
+        "Eu não vou julgar e não vou sumir. Vamos construir o seu plano de saída com total segurança."
+    ),
     "prevencao_violencia": (
         "Compreendo que momentos de tensão são desafiadores. Educar sem violência "
         "é fundamental para o desenvolvimento saudável do cérebro da criança. "
         "Em vez do castigo físico, tente a 'pausa positiva': afaste-se por 2 minutos "
-        "se sentir que vai perder o controle, e depois converse com a criança no nível do olhar dela, "
-        "explicando a consequência lógica do comportamento."
+        "se sentir que vai perder o controle, e depois converse com a criança no nível do olhar dela."
     ),
     "inteligencia_emocional": (
-        "Lidar com emoções intensas é um aprendizado constante. As 'birras' geralmente "
-        "são a forma da criança expressar uma frustração que ela ainda não sabe verbalizar. "
-        "Valide o sentimento ('Eu vejo que você está muito bravo porque não pode comer o doce agora'), "
-        "e ofereça um contorno seguro para essa emoção. Você está indo bem!"
+        "Lidar com emoções intensas é um aprendizado constante. Valide o sentimento: "
+        "'Eu vejo que você está muito bravo porque não pode comer o doce agora', "
+        "e ofereça um contorno seguro para essa emoção. Você está indo bem e eu estou aqui para apoiar."
     ),
     "default": (
-        "Essa é uma ótima pergunta sobre a jornada parental! A educação baseada no respeito "
-        "mútuo cria vínculos profundos. Lembre-se que as crianças aprendem muito mais pelo "
-        "seu exemplo do que pelas suas palavras. Como você está se sentindo sobre essa situação hoje?"
+        "Bem-vinda ao seu espaço seguro, Guerreira. Eu sou a IA Conselheira do Legado, rodando 100% no seu dispositivo. "
+        "Nenhum dado que você digita aqui vai para a nuvem. Estou aqui para te ouvir sem julgamentos. "
+        "Como você está se sentindo hoje? Se precisar de desabafo silencioso ou ajuda prática, é só falar."
     )
 }
 
