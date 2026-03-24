@@ -1,0 +1,123 @@
+"use client";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowLeft, Lock, Mail, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      // Chama nossa rota Next.js, não o backend direto, para que o Next.js possa setar o cookie HttpOnly
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) {
+        throw new Error("E-mail ou senha incorretos.");
+      }
+
+      // Sucesso! O cookie HttpOnly foi setado. Redireciona para o dashboard ou admin
+      router.push("/dashboard");
+      router.refresh(); // Força o middleware a rodar com o novo cookie
+
+    } catch (err: any) {
+      setError(err.message || "Erro ao conectar com o servidor.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <main className="min-h-screen relative flex items-center justify-center p-6">
+      {/* Background ambiente fallback */}
+      <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-[2px] -z-10" />
+
+      <Link href="/" className="absolute top-8 left-8 flex items-center gap-2 text-slate-400 hover:text-slate-200 transition-colors z-20">
+        <ArrowLeft className="w-4 h-4" /> Voltar
+      </Link>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        className="w-full max-w-md relative z-10"
+      >
+        {/* Card Holográfico (Glassmorphism Padrão Apple/Stripe) */}
+        <div className="bg-slate-900/50 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl shadow-black/50 relative overflow-hidden">
+          
+          {/* Efeito de luz interno no card */}
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
+          <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="text-center mb-8 relative z-10">
+            <h1 className="text-2xl font-bold text-slate-50 tracking-tight mb-2">Acesso Restrito</h1>
+            <p className="text-sm text-slate-400">Insira suas credenciais blindadas.</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-5 relative z-10">
+            
+            {error && (
+              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm text-center font-medium">
+                {error}
+              </div>
+            )}
+
+            <div className="space-y-4">
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-emerald-400 transition-colors">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Seu e-mail"
+                  required
+                  className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-2xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all font-medium"
+                />
+              </div>
+
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-emerald-400 transition-colors">
+                  <Lock className="w-5 h-5" />
+                </div>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Sua senha"
+                  required
+                  className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-2xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all font-medium"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full flex justify-center items-center py-3.5 px-4 rounded-2xl text-slate-950 bg-emerald-500 hover:bg-emerald-400 font-bold tracking-wide transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] mt-2"
+            >
+              {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Autenticar Conexão"}
+            </button>
+          </form>
+
+          <div className="mt-6 text-center text-sm text-slate-500 relative z-10">
+            Esqueceu sua senha? <Link href="#" className="text-emerald-400 hover:text-emerald-300 font-medium transition-colors">Recuperação Segura</Link>
+          </div>
+        </div>
+      </motion.div>
+    </main>
+  );
+}
