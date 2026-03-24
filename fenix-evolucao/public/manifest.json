@@ -1,0 +1,18 @@
+{
+  "name": "O Legado — Proteção à Mulher",
+  "short_name": "Legado",
+  "description": "Ecossistema de proteção, educação e independência financeira para mulheres.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#10b981",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
