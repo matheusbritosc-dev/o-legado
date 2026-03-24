@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  // @ts-ignore - Evita erros de tipagem estrita da versão da API entre ambiente local e Vercel
-  apiVersion: "2024-12-18.acacia",
+  apiVersion: "2026-02-25.clover",
 });
 
 const PLANS: Record<string, { amount: number; name: string; interval?: "month" | "year" }> = {
