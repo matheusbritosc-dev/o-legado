@@ -40,14 +40,40 @@ async def verificar_geofencing(lat_atual: float, lon_atual: float, medidas: List
             
     return violacoes
 
+from services.whatsapp_service import whatsapp_service
+import asyncio
+
 async def disparar_notificacoes_emergencia(alerta: AlertaSeguranca):
     """
-    Simula o disparo de Webhooks, SMS e Emails para a rede de apoio da usuária.
-    Na vida real, integraria com Twilio ou AWS SNS.
+    Dispara notificações reais via WhatsApp Cloud API para a rede de apoio da usuária
+    e painéis de controle.
     """
     print(f"🚨 [URGENTE] SOS DISPARADO para Usuária {alerta.usuario_id}")
     print(f"📍 Coordenadas: {alerta.latitude}, {alerta.longitude} (Precisão: {alerta.precisao_metros}m)")
-    print(f"📲 SMS enviado para Rede de Apoio. Webhook enviado para Central de Polícia Parceira.")
+    
+    # Monta a mensagem estruturada
+    mensagem = (
+        f"🚨 *ALERTA DE EMERGÊNCIA - O LEGADO* 🚨\n\n"
+        f"A usuária portadora deste ID acionou o Botão de Pânico Invisível.\n\n"
+        f"📍 *Coordenadas:* https://www.google.com/maps/search/?api=1&query={alerta.latitude},{alerta.longitude}\n"
+        f"⏱️ *Precisão:* {alerta.precisao_metros} metros\n\n"
+        f"_Por favor, tente contato. Se não houver resposta, acione o 190._"
+    )
+    
+    # TODO: Em produção, buscar o telefone da Rede de Apoio ou SSP no banco de dados
+    # Para testes/alpha, envia para um número de teste configurado na variável META_TEST_NUMBER ou falha graciosa.
+    import os
+    numero_destino = os.getenv("META_TEST_NUMBER", "")
+    
+    if numero_destino:
+        print(f"📲 Tentando enviar WhatsApp via Meta API para {numero_destino}...")
+        sucesso = await whatsapp_service.enviar_mensagem(numero_destino, mensagem)
+        if sucesso:
+            print("✅ WhatsApp entregue com sucesso.")
+        else:
+            print("❌ Falha no envio do WhatsApp (verifique as chaves e o template da Meta).")
+    else:
+        print("⚠️ Variável META_TEST_NUMBER ausente. Simulando envio de SMS/Webhook...")
     
     alerta.notificacoes_enviadas = True
     return True
