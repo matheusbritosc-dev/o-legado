@@ -30,24 +30,15 @@ function gerarPixPayload(chave: string, nome: string, cidade: string, valor: str
 }
 
 function PixContent() {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const coupon = searchParams.get("coupon");
-  const isFree = coupon === "LEGADOFREE";
+  
+  // Usuário pediu para liberar 100 primeiros cadastros gratuitamente com 6 meses de acesso
+  const isFree = true; 
 
-  const [copied, setCopied] = useState(false);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const pixPayload = gerarPixPayload(PIX_CONFIG.chave, PIX_CONFIG.nome, PIX_CONFIG.cidade, PIX_CONFIG.valor);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(pixPayload);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 3000);
-  };
 
   const handleFreeRegistration = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,10 +52,9 @@ function PixContent() {
           nome, 
           email, 
           senha,
-          perfil_json: { is_alpha_tester: true, origem: "cupom_legadofree" }
+          perfil_json: { gratis_6_meses: true, origem: "campanha_100_vagas" }
         }),
       });
-      // Mesmo se der erro (ex: e-mail já existe), deixamos passar para não bloquear a Alpha Tester
       router.push("/pix/sucesso?coupon=LEGADOFREE");
     } catch {
       router.push("/pix/sucesso?coupon=LEGADOFREE");
@@ -80,88 +70,54 @@ function PixContent() {
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-slate-900/60 backdrop-blur-2xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-black/50"
+        className="bg-slate-900/60 backdrop-blur-2xl border border-violet-500/30 rounded-3xl overflow-hidden shadow-2xl shadow-violet-900/20"
       >
         {/* Header */}
-        <div className={`px-6 py-6 text-center border-b ${isFree ? "bg-violet-500/10 border-violet-500/20" : "bg-emerald-500/10 border-emerald-500/20"}`}>
-          <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold mb-3 ${isFree ? "bg-violet-500/20 text-violet-400" : "bg-emerald-500/20 text-emerald-400"}`}>
-            <Zap className="w-3 h-3" /> {isFree ? "CONVITE VIP ALPHA TESTER" : "OFERTA DE LANÇAMENTO"}
+        <div className="px-6 py-6 text-center border-b bg-violet-500/10 border-violet-500/20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold mb-3 bg-violet-500/20 text-violet-400">
+            <Zap className="w-3 h-3" /> CAMPANHA DE LANÇAMENTO
           </div>
-          <h1 className="text-2xl font-bold text-slate-50 mb-1">Membro Founder</h1>
-          <p className="text-slate-400 text-sm">Acesso vitalício à comunidade Legado</p>
+          <h1 className="text-2xl font-bold text-slate-50 mb-1">Crie sua Conta</h1>
+          <p className="text-slate-400 text-sm">6 Meses de Acesso 100% Gratuito</p>
         </div>
 
         {/* Preço */}
         <div className="text-center py-6 border-b border-white/5 relative overflow-hidden">
-          {isFree && (
-            <div className="absolute inset-0 bg-violet-500/5 flex items-center justify-center opacity-50">
-              <div className="w-[200%] h-20 bg-violet-500/10 -rotate-12 transform origin-left" />
-            </div>
-          )}
-          <div className="flex items-baseline justify-center gap-2 relative z-10">
-            <span className="text-sm text-slate-500 line-through">R$ 97</span>
-            {isFree ? (
-              <span className="text-4xl font-extrabold text-violet-400 uppercase tracking-wider">Free</span>
-            ) : (
-              <>
-                <span className="text-4xl font-extrabold text-emerald-400">R$ 47</span>
-                <span className="text-slate-500 text-sm">,00</span>
-              </>
-            )}
+          <div className="absolute inset-0 bg-violet-500/5 flex items-center justify-center opacity-50">
+            <div className="w-[200%] h-20 bg-violet-500/10 -rotate-12 transform origin-left" />
           </div>
-          <p className={`text-xs mt-2 font-medium ${isFree ? "text-violet-400" : "text-slate-500"}`}>
-            {isFree ? "✅ Cupom LEGADOFREE Aplicado!" : "Pagamento único · Sem mensalidade"}
+          <div className="flex items-baseline justify-center gap-2 relative z-10">
+            <span className="text-sm text-slate-500 line-through">R$ 97 / mês</span>
+            <span className="text-4xl font-extrabold text-violet-400 uppercase tracking-wider">Grátis</span>
+          </div>
+          <p className="text-sm mt-3 font-semibold text-violet-300 flex items-center justify-center gap-2">
+            <ShieldCheck className="w-4 h-4" /> Vagas restantes: <span className="text-white px-2 py-0.5 bg-violet-600 rounded">87/100</span>
           </p>
         </div>
 
-        {isFree ? (
-           /* Form Gratuito Alpha Tester */
-           <div className="px-6 py-8">
-             <p className="text-center text-slate-300 text-sm mb-6">
-               Crie seu acesso agora para ativar sua conta gratuita vitalícia como Alpha Tester.
-             </p>
-             <form onSubmit={handleFreeRegistration} className="space-y-4">
-               <div className="relative">
-                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
-                 <input type="text" required value={nome} onChange={e => setNome(e.target.value)} placeholder="Seu nome" disabled={loading} className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 focus:border-violet-500 rounded-xl text-slate-100 text-sm" />
-               </div>
-               <div className="relative">
-                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
-                 <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Seu melhor e-mail" disabled={loading} className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 focus:border-violet-500 rounded-xl text-slate-100 text-sm" />
-               </div>
-               <div className="relative">
-                 <LockKeyhole className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
-                 <input type="password" required value={senha} onChange={e => setSenha(e.target.value)} placeholder="Crie uma senha forte" disabled={loading} className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 focus:border-violet-500 rounded-xl text-slate-100 text-sm" />
-               </div>
-               <button type="submit" disabled={loading} className="w-full mt-2 py-4 rounded-xl bg-violet-500 hover:bg-violet-400 text-white font-bold text-sm transition-all shadow-lg shadow-violet-900/30">
-                 {loading ? "Liberando Acesso..." : "Liberar Acesso Gratuito Agora"}
-               </button>
-             </form>
-           </div>
-        ) : (
-          /* QR Code Padrão PIX */
-          <div className="px-6 py-8">
-            <div className="bg-white rounded-2xl p-4 mx-auto w-fit mb-6">
-              <QRCodeSVG value={pixPayload} size={220} level="M" includeMargin={false} bgColor="#FFFFFF" fgColor="#000000" />
+        {/* Form Gratuito Alpha Tester */}
+        <div className="px-6 py-8">
+          <p className="text-center text-slate-300 text-sm mb-6">
+            Preencha os dados abaixo para garantir uma das primeiras 100 vagas com 6 meses de gratuidade total.
+          </p>
+          <form onSubmit={handleFreeRegistration} className="space-y-4">
+            <div className="relative">
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <input type="text" required value={nome} onChange={e => setNome(e.target.value)} placeholder="Seu nome" disabled={loading} className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 focus:border-violet-500 rounded-xl text-slate-100 text-sm" />
             </div>
-            <p className="text-center text-slate-400 text-sm mb-4">Escaneie o QR Code ou copie o código abaixo:</p>
-            <button onClick={handleCopy} className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-sm transition-all ${copied ? "bg-emerald-500 text-slate-950" : "bg-slate-800 text-slate-100 border border-white/10"}`}>
-              {copied ? <><CheckCircle className="w-4 h-4" /> Copiado!</> : <><Copy className="w-4 h-4" /> Copiar Código PIX</>}
+            <div className="relative">
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Seu melhor e-mail" disabled={loading} className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 focus:border-violet-500 rounded-xl text-slate-100 text-sm" />
+            </div>
+            <div className="relative">
+              <LockKeyhole className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <input type="password" required value={senha} onChange={e => setSenha(e.target.value)} placeholder="Crie uma senha forte" disabled={loading} className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 focus:border-violet-500 rounded-xl text-slate-100 text-sm" />
+            </div>
+            <button type="submit" disabled={loading} className="w-full mt-2 py-4 rounded-xl bg-violet-500 hover:bg-violet-400 text-white font-bold text-sm transition-all shadow-lg shadow-violet-900/30">
+              {loading ? "Garantindo Vaga..." : "Garantir Meus 6 Meses Grátis"}
             </button>
-            <div className="flex items-center justify-center gap-2 mt-4 text-amber-400 text-xs">
-              <Clock className="w-3.5 h-3.5" /> Exclusivo para os primeiros Founders
-            </div>
-            {/* Segurança */}
-            <div className="mt-8 pt-4 border-t border-white/5 flex items-center justify-center gap-2 text-slate-500 text-xs">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> PIX · 100% Seguro
-            </div>
-            <div className="mt-6">
-              <Link href="/pix/sucesso" className="block w-full text-center py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition-all">
-                Já fiz o PIX → Acessar Área VIP
-              </Link>
-            </div>
-          </div>
-        )}
+          </form>
+        </div>
       </motion.div>
     </div>
   );

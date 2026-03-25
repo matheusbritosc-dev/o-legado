@@ -23,9 +23,9 @@ export default function Home() {
         </div>
         <Link
           href="/pix"
-          className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-sm font-bold transition-all"
+          className="px-4 py-2 rounded-xl bg-violet-500 hover:bg-violet-400 text-white text-sm font-bold transition-all shadow-lg shadow-violet-500/20"
         >
-          Seja Membro Founder
+          Acesso Gratuito
         </Link>
       </nav>
 

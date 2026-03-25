@@ -18,8 +18,16 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "O Legado — Comand Center",
-  description: "Plataforma de segurança e proteção.",
+  title: "Proteção à mulher – Ligue 180 | O Legado",
+  description: "Plataforma avançada de segurança e proteção à mulher. Apoio a vítimas de abuso, violência doméstica, e reinserção no mercado. Denúncia anônima e conexão com 180.",
+  keywords: ["proteção à mulher", "Ligue 180", "denúncia violência contra mulher", "apoio a vítimas de abuso", "violência doméstica", "O Legado", "Goiás"],
+  openGraph: {
+    title: "O Legado — Proteção e Educação",
+    description: "Tecnologia de ponta contra a violência doméstica. Modo Furtivo, Inteligência Artificial e apoio à mulher.",
+    siteName: "O Legado",
+    locale: "pt_BR",
+    type: "website",
+  },
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,

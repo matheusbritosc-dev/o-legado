@@ -191,10 +191,10 @@ export default function RegisterForm() {
                     Dados enviados com segurança. Você não está mais sozinha.
                   </p>
                   <a
-                    href="/assine"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-900/30"
+                    href="/pix"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-violet-600 text-white font-bold hover:bg-violet-500 transition-all shadow-lg shadow-violet-900/30"
                   >
-                    Tornar-se Membro Fundadora →
+                    Acesso 100% Gratuito (6 Meses) →
                   </a>
                 </motion.div>
               )}
