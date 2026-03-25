@@ -38,7 +38,7 @@ async def consultar_conselheiro_stream(pergunta: str, contexto_rag: str = "Nenhu
                     "Accept": "text/event-stream"
                 }
                 payload = {
-                    "model": "meta/llama3-70b-instruct",
+                    "model": "nvidia/nemotron-4-340b-instruct",
                     "messages": [
                         {"role": "system", "content": CONSELHEIRO_PROMPT},
                         {"role": "user", "content": f"Contexto interno: {contexto_rag}\n\nMeu relato/pergunta: {pergunta}"}
