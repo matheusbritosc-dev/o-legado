@@ -61,44 +61,36 @@ export default function InstallPrompt() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
-          className="fixed bottom-6 left-4 right-4 md:left-auto md:right-6 md:w-96 z-[9999]"
+          className="fixed bottom-20 right-4 left-4 md:bottom-6 md:left-auto md:right-6 md:w-96 z-[90]"
         >
-          <div className="bg-slate-900/95 backdrop-blur-xl border border-emerald-500/30 shadow-2xl shadow-emerald-900/40 rounded-2xl p-4 flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex-shrink-0 flex items-center justify-center p-2">
-              {/* O icone oficial ou furitvo pode ir aqui */}
-              <img src="/icon.svg" alt="App Icon" className="w-8 h-8 drop-shadow-lg" />
+          <div className="bg-slate-900/98 backdrop-blur-2xl border border-emerald-500/20 shadow-2xl shadow-black/80 rounded-2xl p-3 sm:p-4 flex items-center gap-3 sm:gap-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-800 border border-slate-700 flex-shrink-0 flex items-center justify-center p-1.5 sm:p-2">
+              <img src="/icon.svg" alt="App Icon" className="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-lg" />
             </div>
             
-            <div className="flex-1">
-              <h4 className="text-slate-50 font-bold text-sm mb-1">Proteção na Tela Inicial</h4>
-              {isIOS ? (
-                <p className="text-slate-400 text-xs leading-relaxed">
-                  Toque em <span className="bg-slate-800 px-1.5 py-0.5 rounded text-slate-200">Compartilhar</span> 
-                  e depois em <strong className="text-emerald-400">Adicionar à Tela de Início</strong> para instalar.
-                </p>
-              ) : (
-                <p className="text-slate-400 text-xs mb-3 leading-relaxed">
-                  Instale o Legado como um aplicativo protegido no seu dispositivo para acesso <span className="text-emerald-400 font-bold">offline</span>.
-                </p>
-              )}
+            <div className="flex-1 min-w-0">
+              <h4 className="text-slate-50 font-bold text-xs sm:text-sm mb-0.5 truncate">Instalar Legado</h4>
+              <p className="text-slate-400 text-[10px] sm:text-xs leading-tight line-clamp-2">
+                {isIOS ? 'Toque em Compartilhar > Adicionar à Tela de Início' : 'Acesse offline como um aplicativo nativo.'}
+              </p>
+            </div>
 
+            <div className="flex items-center gap-2">
               {!isIOS && (
                 <button
                   onClick={handleInstallClick}
-                  className="w-full py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-500/20"
+                  className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-[10px] sm:text-xs transition-all shadow-lg shadow-emerald-500/20 whitespace-nowrap"
                 >
-                  <Download className="w-3.5 h-3.5" />
-                  Instalar App (Acesso Rápido)
+                  Instalar
                 </button>
               )}
+              <button 
+                onClick={() => setShowPrompt(false)}
+                className="p-1.5 rounded-md text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
-
-            <button 
-              onClick={() => setShowPrompt(false)}
-              className="p-1 rounded-md text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-colors absolute top-2 right-2"
-            >
-              <X className="w-4 h-4" />
-            </button>
           </div>
         </motion.div>
       )}

@@ -41,33 +41,33 @@ export default function ServerStatus() {
   if (status === 'online') return null;
 
   return (
-    <div className="fixed bottom-4 left-4 z-[100] animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="bg-slate-900/90 backdrop-blur-md border border-violet-500/30 p-4 rounded-2xl shadow-2xl flex items-center gap-4 max-w-sm">
-        <div className="relative">
-          <div className="w-10 h-10 rounded-full bg-violet-500/10 flex items-center justify-center">
+    <div className="fixed bottom-4 left-4 z-[100] sm:bottom-6 sm:left-6 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-[calc(100vw-2rem)]">
+      <div className="bg-slate-900/95 backdrop-blur-md border border-violet-500/30 p-3 sm:p-4 rounded-2xl shadow-2xl flex items-center gap-3 sm:gap-4">
+        <div className="relative shrink-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-violet-500/10 flex items-center justify-center">
             {status === 'checking' || status === 'waking' ? (
-              <Loader2 className="w-5 h-5 text-violet-400 animate-spin" />
+              <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 text-violet-400 animate-spin" />
             ) : (
-              <ShieldCheck className="w-5 h-5 text-emerald-400" />
+              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
             )}
           </div>
           {status === 'waking' && (
-            <span className="absolute -top-1 -right-1 flex h-3 w-3">
+            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5 sm:h-3 sm:w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-violet-500"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-violet-500"></span>
             </span>
           )}
         </div>
         
-        <div>
-          <h4 className="text-slate-100 text-sm font-bold flex items-center gap-2">
-            {status === 'waking' ? 'Ativando Camada de Segurança' : 'Verificando Conexão...'}
-            <Zap className="w-3 h-3 text-yellow-400 fill-yellow-400" />
+        <div className="min-w-0">
+          <h4 className="text-slate-100 text-xs sm:text-sm font-bold flex items-center gap-1.5 truncate">
+            {status === 'waking' ? 'Ativando Segurança' : 'Conectando...'}
+            <Zap className="w-3 h-3 text-yellow-400 fill-yellow-400 shrink-0" />
           </h4>
-          <p className="text-slate-400 text-xs mt-0.5 leading-relaxed">
+          <p className="text-slate-400 text-[10px] sm:text-xs mt-0.5 leading-tight sm:leading-relaxed">
             {status === 'waking' 
-              ? 'O servidor seguro está sendo inicializado. Pode levar até 40 segundos.' 
-              : 'Estabelecendo túnel criptografado com a API da Legado.'}
+              ? 'O servidor seguro está sendo inicializado (partida a frio).' 
+              : 'Estabelecendo túnel criptografado com a API.'}
           </p>
         </div>
       </div>

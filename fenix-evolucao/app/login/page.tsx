@@ -11,38 +11,47 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [wakingUp, setWakingUp] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setWakingUp(false);
+
+    // Timeout para avisar que o servidor está acordando (Cold Start Render)
+    const wakeUpTimer = setTimeout(() => {
+      setWakingUp(true);
+    }, 4500);
 
     try {
-      // Chama nossa rota Next.js, não o backend direto, para que o Next.js possa setar o cookie HttpOnly
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
+      clearTimeout(wakeUpTimer);
+
       if (!res.ok) {
-        throw new Error("E-mail ou senha incorretos.");
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "E-mail ou senha incorretos.");
       }
 
-      // Sucesso! O cookie HttpOnly foi setado. Redireciona para o dashboard ou admin
       router.push("/dashboard");
-      router.refresh(); // Força o middleware a rodar com o novo cookie
+      router.refresh();
 
     } catch (err: any) {
+      clearTimeout(wakeUpTimer);
       setError(err.message || "Erro ao conectar com o servidor.");
     } finally {
       setLoading(false);
+      setWakingUp(false);
     }
   };
 
   return (
     <main className="min-h-screen relative flex items-center justify-center p-6">
-      {/* Background ambiente fallback */}
       <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-[2px] -z-10" />
 
       <Link href="/" className="absolute top-8 left-8 flex items-center gap-2 text-slate-400 hover:text-slate-200 transition-colors z-20">
@@ -54,10 +63,8 @@ export default function LoginPage() {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         className="w-full max-w-md relative z-10"
       >
-        {/* Card Holográfico (Glassmorphism Padrão Apple/Stripe) */}
         <div className="bg-slate-900/50 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl shadow-black/50 relative overflow-hidden">
           
-          {/* Efeito de luz interno no card */}
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -69,8 +76,14 @@ export default function LoginPage() {
           <form onSubmit={handleLogin} className="space-y-5 relative z-10">
             
             {error && (
-              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm text-center font-medium">
+              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm text-center font-medium animate-in fade-in zoom-in-95 duration-300">
                 {error}
+              </div>
+            )}
+
+            {loading && wakingUp && (
+              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] sm:text-xs text-center font-medium animate-pulse">
+                O servidor seguro está sendo despertado... Aguarde 30s.
               </div>
             )}
 
