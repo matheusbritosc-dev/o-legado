@@ -39,6 +39,8 @@ export const metadata: Metadata = {
   },
 };
 
+import ServerStatus from "@/components/ServerStatus";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={inter.variable}>
       <body className="text-slate-50 antialiased min-h-screen relative">
+        <ServerStatus />
         <InteractiveBackground />
         <InstallPrompt />
         <div className="relative z-10">
