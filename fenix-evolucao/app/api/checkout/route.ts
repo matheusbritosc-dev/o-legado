@@ -1,17 +1,17 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2026-02-25.clover",
-});
-
 const PLANS: Record<string, { amount: number; name: string; interval?: "month" | "year" }> = {
-  base_mensal: { amount: 4900, name: "Legado — Apoio Base Mensal", interval: "month" },
-  membro_anual: { amount: 50000, name: "Legado — Membro Fundadora Anual", interval: "year" },
+  base_mensal: { amount: 4900, name: "Legado – Apoio Base Mensal", interval: "month" },
+  membro_anual: { amount: 50000, name: "Legado – Membro Fundadora Anual", interval: "year" },
 };
 
 export async function POST(req: Request) {
   try {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+      apiVersion: "2026-02-25.clover",
+    });
+
     const { plan } = await req.json();
     const chosen = PLANS[plan];
     if (!chosen) return NextResponse.json({ error: "Plano inválido" }, { status: 400 });
