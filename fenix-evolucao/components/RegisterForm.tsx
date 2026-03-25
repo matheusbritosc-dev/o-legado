@@ -22,7 +22,7 @@ export default function RegisterForm() {
       // Simula o tempo de "criptografia" visual para a usuária
       await new Promise((r) => setTimeout(r, 1800));
       
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8001/api/v1";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://legado-api.onrender.com/api/v1";
       
       try {
         const res = await fetch(`${apiUrl}/auth/registrar`, {

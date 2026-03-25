@@ -83,7 +83,8 @@ export default function SOSPage() {
         return;
       }
 
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/seguranca/sos`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://legado-api.onrender.com/api/v1";
+      fetch(`${apiUrl}/seguranca/sos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ latitude: lat ?? null, longitude: lon ?? null }),
