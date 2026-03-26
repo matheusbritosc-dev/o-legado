@@ -21,6 +21,7 @@ app.add_middleware(
 app.include_router(api_router, prefix="/api/v1")
 
 @app.get("/health")
+@app.get("/api/v1/health")
 async def health_check():
     """Health check endpoint for the Fênix-Evolução service."""
     return {"status": "ok", "service": settings.PROJECT_NAME}

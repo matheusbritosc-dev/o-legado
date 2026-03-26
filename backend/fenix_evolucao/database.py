@@ -7,10 +7,7 @@ raw_url = os.getenv(
     "DATABASE_URL", 
     "postgresql+asyncpg://postgres:postgres@localhost:5432/fenix_evolucao"
 )
-# Fix: garante que a URL use o driver asyncpg
-if DATABASE_URL and DATABASE_URL.startswith("postgresql://"):
-        DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
-
+# Converte a URL do Render (postgres://) para o formato do asyncpg
 if raw_url.startswith("postgres://"):
     DATABASE_URL = raw_url.replace("postgres://", "postgresql+asyncpg://", 1)
 elif raw_url.startswith("postgresql://") and not raw_url.startswith("postgresql+asyncpg://"):
