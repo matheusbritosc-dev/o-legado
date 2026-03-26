@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     # Encryption (AES-256 for logs)
     # Deve ser uma base64 32-byte key válida para o Fernet (cryptography)
     # Ex: Fernet.generate_key()
-    ENCRYPTION_KEY: str = b"vQx6_FjX_F_8aY2Hh9O8J0xZ-a1aJ1q6Fz4vQx6_FjX="
+    ENCRYPTION_KEY: str = "vQx6_FjX_F_8aY2Hh9O8J0xZ-a1aJ1q6Fz4vQx6_FjX="
     
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
 
