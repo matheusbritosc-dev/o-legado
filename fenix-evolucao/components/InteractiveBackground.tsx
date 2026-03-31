@@ -52,7 +52,7 @@ export default function InteractiveBackground() {
       )}
 
       {/* Static ambient glow to ensure it doesn't look totally dark without mouse */}
-      <div className="absolute top-1/2 left-1/4 w-[800px] h-[800px] bg-emerald-500/10 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/2 opacity-50 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 w-[800px] h-[800px] bg-violet-500/10 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/2 opacity-50 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
     </div>
   );

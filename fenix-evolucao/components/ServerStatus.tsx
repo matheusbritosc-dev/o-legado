@@ -6,7 +6,7 @@ import { Loader2, ShieldCheck, Zap } from 'lucide-react';
 export default function ServerStatus() {
   const [status, setStatus] = useState<'checking' | 'waking' | 'online'>('checking');
   // Corrigido: O endpoint de health está na raiz do app, não dentro de /api/v1
-  const API_URL = "https://legado-api.onrender.com/health";
+  const API_URL = "/_api/health";
 
   useEffect(() => {
     const checkServer = async () => {
@@ -49,7 +49,7 @@ export default function ServerStatus() {
             {status === 'checking' || status === 'waking' ? (
               <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 text-violet-400 animate-spin" />
             ) : (
-              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
+              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-violet-400" />
             )}
           </div>
           {status === 'waking' && (

@@ -10,7 +10,7 @@ const KPICard = ({ title, value, change, icon: Icon, color }: any) => (
         <Icon className={`w-6 h-6 text-${color}-400`} />
       </div>
       {change && (
-        <span className="flex items-center text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-full border border-emerald-500/20">
+        <span className="flex items-center text-xs font-bold text-violet-400 bg-violet-500/10 px-2 py-1 rounded-full border border-violet-500/20">
           <ArrowUpRight className="w-3 h-3 mr-1" /> {change}
         </span>
       )}
@@ -30,15 +30,15 @@ export default function AdminPage() {
           <h2 className="text-3xl font-bold text-slate-50 mb-2">Visão Geral Global</h2>
           <p className="text-slate-400">Monitoramento em tempo real do ecossistema O Legado.</p>
         </div>
-        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-bold">
-          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold">
+          <div className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
           SISTEMA ONLINE
         </div>
       </header>
 
       {/* KPIs Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        <KPICard title="Vidas Protegidas" value="1.248" change="+12%" icon={ShieldCheck} color="emerald" />
+        <KPICard title="Vidas Protegidas" value="1.248" change="+12%" icon={ShieldCheck} color="violet" />
         <KPICard title="Membros Fundadores" value="342" change="+5%" icon={Users} color="blue" />
         <KPICard title="Interações IA (Mensais)" value="45.2K" change="+28%" icon={Zap} color="amber" />
         <KPICard title="Alertas SOS Ativos" value="0" icon={AlertTriangle} color="rose" />
@@ -53,13 +53,13 @@ export default function AdminPage() {
           </h3>
           <div className="h-64 flex flex-col justify-center items-center border border-white/5 rounded-2xl bg-black/20 overflow-hidden relative">
             {/* Visual placeholder for a chart */}
-            <div className="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-emerald-500/20 to-transparent" />
+            <div className="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-violet-500/20 to-transparent" />
             <svg className="w-full h-full absolute inset-0 opacity-50" preserveAspectRatio="none" viewBox="0 0 100 100">
               <path d="M0,100 L0,50 Q25,30 50,70 T100,40 L100,100 Z" fill="rgba(16, 185, 129, 0.1)" />
               <path d="M0,50 Q25,30 50,70 T100,40" fill="none" stroke="#34d399" strokeWidth="2" />
             </svg>
             <div className="relative z-10 text-center">
-              <p className="text-emerald-400 font-mono text-sm mb-1">Análise de Risco Geográfica</p>
+              <p className="text-violet-400 font-mono text-sm mb-1">Análise de Risco Geográfica</p>
               <p className="text-slate-500 text-xs">Mapeamento dinâmico baseado em consultas ao Conselheiro IA</p>
             </div>
           </div>
@@ -92,7 +92,7 @@ export default function AdminPage() {
                   <span className="text-xs text-slate-500">{alerta.tempo}</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-slate-400">
-                  {alerta.icon ? <alerta.icon className="w-3.5 h-3.5 text-emerald-400" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-500" />}
+                  {alerta.icon ? <alerta.icon className="w-3.5 h-3.5 text-violet-400" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-500" />}
                   {alerta.status}
                 </div>
               </motion.div>

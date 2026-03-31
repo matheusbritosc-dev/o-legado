@@ -44,7 +44,7 @@ function PixContent() {
     e.preventDefault();
     setLoading(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://legado-api.onrender.com/api/v1";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/_api/api/v1";
       await fetch(`${apiUrl}/auth/registrar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

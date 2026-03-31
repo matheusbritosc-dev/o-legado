@@ -38,17 +38,17 @@ function SucessoContent() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
         className={`bg-slate-900/60 backdrop-blur-2xl border rounded-3xl overflow-hidden shadow-2xl ${
-          isAlphaTester ? "border-violet-500/30 shadow-violet-900/20" : "border-emerald-500/30 shadow-emerald-900/20"
+          isAlphaTester ? "border-violet-500/30 shadow-violet-900/20" : "border-violet-500/30 shadow-violet-900/20"
         }`}
       >
         {/* Confetti Header */}
         <div className={`px-8 py-10 text-center border-b relative overflow-hidden ${
-          isAlphaTester ? "bg-gradient-to-br from-violet-500/20 to-fuchsia-500/10 border-violet-500/20" : "bg-gradient-to-br from-emerald-500/20 to-teal-500/10 border-emerald-500/20"
+          isAlphaTester ? "bg-gradient-to-br from-violet-500/20 to-fuchsia-500/10 border-violet-500/20" : "bg-gradient-to-br from-violet-500/20 to-fuchsia-500/10 border-violet-500/20"
         }`}>
           <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 20, ease: "linear" }} className="absolute top-4 right-8 text-yellow-400/30">
             <Star className="w-6 h-6 fill-current" />
           </motion.div>
-          <motion.div animate={{ rotate: -360 }} transition={{ repeat: Infinity, duration: 15, ease: "linear" }} className={`absolute top-12 left-6 ${isAlphaTester ? "text-violet-400/20" : "text-emerald-400/20"}`}>
+          <motion.div animate={{ rotate: -360 }} transition={{ repeat: Infinity, duration: 15, ease: "linear" }} className={`absolute top-12 left-6 ${isAlphaTester ? "text-violet-400/20" : "text-violet-400/20"}`}>
             <Star className="w-4 h-4 fill-current" />
           </motion.div>
 
@@ -57,10 +57,10 @@ function SucessoContent() {
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring" }}
             className={`w-20 h-20 rounded-full border-2 flex items-center justify-center mx-auto mb-5 ${
-              isAlphaTester ? "bg-violet-500/20 border-violet-500/40" : "bg-emerald-500/20 border-emerald-500/40"
+              isAlphaTester ? "bg-violet-500/20 border-violet-500/40" : "bg-violet-500/20 border-violet-500/40"
             }`}
           >
-            <Crown className={`w-10 h-10 ${isAlphaTester ? "text-violet-400" : "text-emerald-400"}`} />
+            <Crown className={`w-10 h-10 ${isAlphaTester ? "text-violet-400" : "text-violet-400"}`} />
           </motion.div>
 
           <motion.h1
@@ -125,7 +125,7 @@ function SucessoContent() {
                 transition={{ delay: 0.8 + i * 0.1 }}
                 className="flex items-center gap-2.5 text-sm text-slate-300"
               >
-                <Heart className={`w-3.5 h-3.5 flex-shrink-0 ${isAlphaTester ? "text-violet-400" : "text-emerald-400"}`} />
+                <Heart className={`w-3.5 h-3.5 flex-shrink-0 ${isAlphaTester ? "text-violet-400" : "text-violet-400"}`} />
                 {item}
               </motion.div>
             ))}
@@ -135,10 +135,10 @@ function SucessoContent() {
         {/* Footer */}
         <div className="border-t border-white/5 px-8 py-5 flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs text-slate-500">
-            <ShieldCheck className={`w-3.5 h-3.5 ${isAlphaTester ? "text-violet-400" : "text-emerald-400"}`} />
+            <ShieldCheck className={`w-3.5 h-3.5 ${isAlphaTester ? "text-violet-400" : "text-violet-400"}`} />
             {isAlphaTester ? "Convite Oficial Seguro" : "Pagamento protegido"}
           </div>
-          <Link href="/dashboard" className="text-sm font-bold text-emerald-400 hover:text-emerald-300 transition-colors">
+          <Link href="/dashboard" className="text-sm font-bold text-violet-400 hover:text-violet-300 transition-colors">
             Ir para o Dashboard →
           </Link>
         </div>

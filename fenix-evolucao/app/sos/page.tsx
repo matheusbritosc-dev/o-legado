@@ -41,7 +41,7 @@ export default function SOSPage() {
 
         if (speed > shakeThreshold && !sending && !sent) {
           // Detectou um chacoalhão violento
-          console.log("Shake detectado! Disparando SOS stealth...");
+          console.log("Shake detectado! Disparando SOS sfuchsiath...");
           sendAlert();
         }
 
@@ -83,7 +83,7 @@ export default function SOSPage() {
         return;
       }
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://legado-api.onrender.com/api/v1";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/_api/api/v1";
       fetch(`${apiUrl}/seguranca/sos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

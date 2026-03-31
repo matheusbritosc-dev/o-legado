@@ -46,7 +46,7 @@ export default function RelatoSuspeitoPage() {
     if (navigator.onLine) {
       // Simula envio para o servidor
       console.log("Enviando silenciosamente para a nuvem:", payload);
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://legado-api.onrender.com/api/v1";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/_api/api/v1";
       fetch(`${apiUrl}/seguranca/relato`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -106,7 +106,7 @@ export default function RelatoSuspeitoPage() {
             className="w-full mt-4 flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-yellow-950 font-bold py-3.5 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {saved ? (
-              <span className="text-emerald-700">✓ Salvo na Nuvem Segura</span>
+              <span className="text-violet-700">✓ Salvo na Nuvem Segura</span>
             ) : (
               <>
                 <Save className="w-5 h-5" /> Guardar Anotação

@@ -23,7 +23,7 @@ const plans = [
     period: "/ ano",
     savings: "Economize R$ 88",
     description: "Para quem quer fazer parte da história do Legado.",
-    color: "emerald",
+    color: "violet",
     features: [
       "Tudo do plano Base",
       "Acesso vitalício de fundadora",
@@ -83,18 +83,18 @@ export default function AssinePage() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className={`relative bg-slate-900/40 backdrop-blur-2xl border ${plan.highlight ? "border-emerald-500/40" : "border-white/10"} rounded-3xl p-8 flex flex-col shadow-2xl shadow-black/50`}
+              className={`relative bg-slate-900/40 backdrop-blur-2xl border ${plan.highlight ? "border-violet-500/40" : "border-white/10"} rounded-3xl p-8 flex flex-col shadow-2xl shadow-black/50`}
             >
               {plan.highlight && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500 text-slate-950 text-xs font-bold">
+                  <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-violet-500 text-slate-950 text-xs font-bold">
                     <Crown className="w-3.5 h-3.5" /> MAIS POPULAR
                   </div>
                 </div>
               )}
 
               <div className="mb-6">
-                <h2 className={`text-xl font-bold mb-1 ${plan.highlight ? "text-emerald-400" : "text-slate-300"}`}>{plan.name}</h2>
+                <h2 className={`text-xl font-bold mb-1 ${plan.highlight ? "text-violet-400" : "text-slate-300"}`}>{plan.name}</h2>
                 <p className="text-slate-500 text-sm">{plan.description}</p>
               </div>
 
@@ -103,7 +103,7 @@ export default function AssinePage() {
                 <span className="text-slate-500 mb-1">{plan.period}</span>
               </div>
               {plan.savings && (
-                <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold mb-6 w-fit">
+                <span className="inline-block px-3 py-1 rounded-full bg-violet-500/10 text-violet-400 text-xs font-semibold mb-6 w-fit">
                   {plan.savings}
                 </span>
               )}
@@ -111,7 +111,7 @@ export default function AssinePage() {
               <ul className="space-y-3 flex-1 mb-8">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-sm text-slate-300">
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                    <Check className="w-4 h-4 text-violet-400 flex-shrink-0 mt-0.5" />
                     {f}
                   </li>
                 ))}
@@ -122,7 +122,7 @@ export default function AssinePage() {
                 disabled={loading === plan.id}
                 className={`w-full py-4 rounded-2xl font-bold text-sm transition-all duration-200 ${
                   plan.highlight
-                    ? "bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg shadow-emerald-900/30 hover:-translate-y-0.5"
+                    ? "bg-violet-500 hover:bg-violet-400 text-slate-950 shadow-lg shadow-violet-900/30 hover:-translate-y-0.5"
                     : "bg-slate-800 hover:bg-slate-700 text-slate-100 hover:-translate-y-0.5"
                 } disabled:opacity-50`}
               >

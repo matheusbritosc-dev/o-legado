@@ -66,7 +66,7 @@ function CalculadoraUI() {
             key={`${btn}-${i}`}
             className={`py-4 text-center text-lg font-medium ${
               ["÷", "×", "−", "+", "="].includes(btn)
-                ? "bg-emerald-500 text-white"
+                ? "bg-violet-500 text-white"
                 : ["AC", "+/-", "%"].includes(btn)
                 ? "bg-slate-700 text-slate-300"
                 : "bg-slate-800 text-white"
@@ -151,7 +151,7 @@ export default function ModoFurtivoPage() {
             onClick={() => setMode("legado")}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
               mode === "legado"
-                ? "bg-emerald-500 text-slate-950"
+                ? "bg-violet-500 text-slate-950"
                 : "bg-slate-800 text-slate-400 hover:bg-slate-700"
             }`}
           >
@@ -198,15 +198,15 @@ export default function ModoFurtivoPage() {
             >
               {mode === "legado" && (
                 <div className="bg-slate-900 min-h-[480px] rounded-2xl p-6 flex flex-col items-center justify-center text-center">
-                  <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mb-4">
-                    <Shield className="w-8 h-8 text-emerald-400" />
+                  <div className="w-16 h-16 rounded-2xl bg-violet-500/20 border border-violet-500/30 flex items-center justify-center mb-4">
+                    <Shield className="w-8 h-8 text-violet-400" />
                   </div>
                   <h3 className="text-lg font-bold text-slate-50 mb-1">O Legado</h3>
                   <p className="text-xs text-slate-500 mb-6">Proteção ativa</p>
                   <div className="w-full space-y-2">
                     <div className="bg-rose-500/20 border border-rose-500/30 rounded-xl py-3 text-sm font-bold text-rose-400">🔴 SOS Emergência</div>
                     <div className="bg-violet-500/20 border border-violet-500/30 rounded-xl py-3 text-sm font-bold text-violet-400">🕵️ Relato Furtivo</div>
-                    <div className="bg-emerald-500/20 border border-emerald-500/30 rounded-xl py-3 text-sm font-bold text-emerald-400">🤖 IA Conselheira</div>
+                    <div className="bg-violet-500/20 border border-violet-500/30 rounded-xl py-3 text-sm font-bold text-violet-400">🤖 IA Conselheira</div>
                     <div className="bg-amber-500/20 border border-amber-500/30 rounded-xl py-3 text-sm font-bold text-amber-400">📚 Escola de Pais</div>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ export default function ModoFurtivoPage() {
         <div className="mt-8 text-center">
           <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium ${
             mode === "legado"
-              ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+              ? "bg-violet-500/10 text-violet-400 border border-violet-500/20"
               : "bg-violet-500/10 text-violet-400 border border-violet-500/20"
           }`}>
             {mode === "legado" ? (

@@ -22,7 +22,7 @@ export default function RegisterForm() {
       // Simula o tempo de "criptografia" visual para a usuária
       await new Promise((r) => setTimeout(r, 1800));
       
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://legado-api.onrender.com/api/v1";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/_api/api/v1";
       
       try {
         const res = await fetch(`${apiUrl}/auth/registrar`, {
@@ -74,8 +74,8 @@ export default function RegisterForm() {
         >
           {/* Header */}
           <div className="bg-white/5 px-8 py-8 text-center border-b border-white/10">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4">
-              <ShieldCheck className="w-7 h-7 text-emerald-400" />
+            <div className="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mx-auto mb-4">
+              <ShieldCheck className="w-7 h-7 text-violet-400" />
             </div>
             <h2 className="text-2xl font-bold text-slate-50 mb-2">Faça Parte da Comunidade</h2>
             <p className="text-slate-400 text-sm">
@@ -98,7 +98,7 @@ export default function RegisterForm() {
                         disabled={encrypting}
                         placeholder="Como devemos te chamar?"
                         required
-                        className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 hover:border-white/20 focus:border-emerald-500 rounded-xl text-slate-100 placeholder-slate-500 outline-none transition-all text-sm disabled:opacity-50"
+                        className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 hover:border-white/20 focus:border-violet-500 rounded-xl text-slate-100 placeholder-slate-500 outline-none transition-all text-sm disabled:opacity-50"
                       />
                     </div>
                   </div>
@@ -114,7 +114,7 @@ export default function RegisterForm() {
                         disabled={encrypting}
                         placeholder="voce@exemplo.com"
                         required
-                        className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 hover:border-white/20 focus:border-emerald-500 rounded-xl text-slate-100 placeholder-slate-500 outline-none transition-all text-sm disabled:opacity-50"
+                        className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 hover:border-white/20 focus:border-violet-500 rounded-xl text-slate-100 placeholder-slate-500 outline-none transition-all text-sm disabled:opacity-50"
                       />
                     </div>
                   </div>
@@ -129,7 +129,7 @@ export default function RegisterForm() {
                         onChange={(e) => setTelefone(e.target.value)}
                         disabled={encrypting}
                         placeholder="(11) 99999-0000"
-                        className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 hover:border-white/20 focus:border-emerald-500 rounded-xl text-slate-100 placeholder-slate-500 outline-none transition-all text-sm disabled:opacity-50"
+                        className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 hover:border-white/20 focus:border-violet-500 rounded-xl text-slate-100 placeholder-slate-500 outline-none transition-all text-sm disabled:opacity-50"
                       />
                     </div>
                   </div>
@@ -143,7 +143,7 @@ export default function RegisterForm() {
                   <button
                     type="submit"
                     disabled={encrypting || !nome || !email}
-                    className="w-full relative overflow-hidden flex items-center justify-center gap-2.5 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:bg-slate-700 disabled:text-slate-500 text-slate-950 font-bold transition-all duration-200 shadow-lg shadow-emerald-900/30"
+                    className="w-full relative overflow-hidden flex items-center justify-center gap-2.5 py-4 rounded-xl bg-violet-500 hover:bg-violet-400 disabled:bg-slate-700 disabled:text-slate-500 text-slate-950 font-bold transition-all duration-200 shadow-lg shadow-violet-900/30"
                   >
                     {encrypting ? (
                       <motion.div className="flex items-center gap-2.5" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -183,8 +183,8 @@ export default function RegisterForm() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center py-6"
                 >
-                  <div className="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-5">
-                    <CheckCircle className="w-10 h-10 text-emerald-400" />
+                  <div className="w-20 h-20 rounded-full bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mx-auto mb-5">
+                    <CheckCircle className="w-10 h-10 text-violet-400" />
                   </div>
                   <h3 className="text-2xl font-bold text-slate-100 mb-2">Bem-vinda ao Legado!</h3>
                   <p className="text-slate-400 text-sm mb-6">

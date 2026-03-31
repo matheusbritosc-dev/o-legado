@@ -12,7 +12,7 @@ export default function DashboardPage() {
         </div>
 
         <nav className="flex-1 space-y-2">
-          <a href="#" className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 font-semibold text-sm">
+          <a href="#" className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-violet-500/10 text-violet-400 font-semibold text-sm">
             <CheckCircle2 className="w-4 h-4" /> Assinatura
           </a>
           <Link href="/manifesto" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-slate-200 text-sm transition-colors">
@@ -36,8 +36,8 @@ export default function DashboardPage() {
         <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 max-w-2xl mb-8 shadow-2xl shadow-black/50">
           <div className="flex items-start justify-between mb-6 pb-6 border-b border-white/10">
             <div>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wide mb-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Ativo
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wide mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" /> Ativo
               </span>
               <h2 className="text-xl font-bold text-slate-100">Plano Anual — Membro Fundadora</h2>
               <p className="text-slate-500 text-sm mt-1">Renovação em 18/03/2027</p>
@@ -56,11 +56,11 @@ export default function DashboardPage() {
             ].map((b) => (
               <Link key={b.title} href={b.link} className="block bg-black/40 border border-white/10 rounded-2xl p-4 hover:bg-black/60 transition-colors">
                 <div className="flex items-center gap-2 mb-2">
-                  <Zap className="w-4 h-4 text-emerald-400" />
+                  <Zap className="w-4 h-4 text-violet-400" />
                   <h4 className="font-bold text-slate-200 text-sm">{b.title}</h4>
                 </div>
                 <p className="text-slate-500 text-xs mb-3">{b.desc}</p>
-                <span className="text-emerald-400 hover:text-emerald-300 text-xs font-semibold transition-colors">
+                <span className="text-violet-400 hover:text-violet-300 text-xs font-semibold transition-colors">
                   Acessar →
                 </span>
               </Link>

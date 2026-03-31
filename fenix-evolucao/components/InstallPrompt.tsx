@@ -63,7 +63,7 @@ export default function InstallPrompt() {
           exit={{ opacity: 0, y: 50 }}
           className="fixed bottom-20 right-4 left-4 md:bottom-6 md:left-auto md:right-6 md:w-96 z-[90]"
         >
-          <div className="bg-slate-900/98 backdrop-blur-2xl border border-emerald-500/20 shadow-2xl shadow-black/80 rounded-2xl p-3 sm:p-4 flex items-center gap-3 sm:gap-4">
+          <div className="bg-slate-900/98 backdrop-blur-2xl border border-violet-500/20 shadow-2xl shadow-black/80 rounded-2xl p-3 sm:p-4 flex items-center gap-3 sm:gap-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-800 border border-slate-700 flex-shrink-0 flex items-center justify-center p-1.5 sm:p-2">
               <img src="/icon.svg" alt="App Icon" className="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-lg" />
             </div>
@@ -79,7 +79,7 @@ export default function InstallPrompt() {
               {!isIOS && (
                 <button
                   onClick={handleInstallClick}
-                  className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-[10px] sm:text-xs transition-all shadow-lg shadow-emerald-500/20 whitespace-nowrap"
+                  className="px-3 py-1.5 rounded-lg bg-violet-500 hover:bg-violet-400 text-slate-950 font-bold text-[10px] sm:text-xs transition-all shadow-lg shadow-violet-500/20 whitespace-nowrap"
                 >
                   Instalar
                 </button>

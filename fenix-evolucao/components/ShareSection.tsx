@@ -15,7 +15,7 @@ export default function ShareSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="text-emerald-400 font-semibold tracking-widest uppercase text-sm mb-4">
+          <p className="text-violet-400 font-semibold tracking-widest uppercase text-sm mb-4">
             Espalhe o Legado
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-5">

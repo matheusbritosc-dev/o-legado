@@ -12,7 +12,7 @@ export default function ManifestoPage() {
         </Link>
 
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
-          <p className="text-emerald-400 font-semibold tracking-widest uppercase text-sm mb-4">O Manifesto</p>
+          <p className="text-violet-400 font-semibold tracking-widest uppercase text-sm mb-4">O Manifesto</p>
           <h1 className="text-4xl md:text-6xl font-bold text-slate-50 leading-tight mb-12">
             Porque Nenhuma Mulher Deve{" "}
             <span className="text-gradient">Caminhar com Medo.</span>
@@ -29,8 +29,8 @@ export default function ManifestoPage() {
 
             <h2 className="text-2xl font-bold text-slate-100 mt-12">Nossos Pilares</h2>
 
-            <div className="bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 border-l-4 border-l-emerald-500">
-              <h3 className="text-lg font-bold text-emerald-400 mb-2">🛡️ Proteção Real</h3>
+            <div className="bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 border-l-4 border-l-violet-500">
+              <h3 className="text-lg font-bold text-violet-400 mb-2">🛡️ Proteção Real</h3>
               <p>Inteligência Artificial que monitora, alerta e protege em tempo real, com sigilo absoluto. Sua localização nunca vai para nenhuma nuvem sem seu consentimento explícito.</p>
             </div>
 
@@ -56,7 +56,7 @@ export default function ManifestoPage() {
           <div className="mt-16 flex flex-col sm:flex-row gap-4">
             <Link
               href="/#cadastro"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition-all"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-violet-500 hover:bg-violet-400 text-slate-950 font-bold transition-all"
             >
               Fazer Parte do Movimento
             </Link>

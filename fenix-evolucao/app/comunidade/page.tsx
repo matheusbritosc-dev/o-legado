@@ -8,12 +8,12 @@ export default function ComunidadePage() {
       {/* Hero */}
       <section className="pt-24 pb-12 px-6 text-center relative z-10">
         <div className="max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-400 text-sm font-medium mb-6">
             <Users className="w-3.5 h-3.5" /> Comunidade Legado
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-slate-50 mb-6 leading-tight">
             Juntas somos{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-200">
               inquebráveis
             </span>
           </h1>
@@ -28,7 +28,7 @@ export default function ComunidadePage() {
               { icon: Users, label: "15.000+ Mulheres" },
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-2 text-slate-400 text-sm">
-                <item.icon className="w-4 h-4 text-emerald-400" />
+                <item.icon className="w-4 h-4 text-violet-400" />
                 {item.label}
               </div>
             ))}

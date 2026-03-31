@@ -5,7 +5,7 @@ import { Shield, BookOpen, HeartHandshake, Brain, Lock, Globe } from "lucide-rea
 const features = [
   {
     icon: Shield,
-    color: "emerald",
+    color: "violet",
     title: "Proteção Real",
     description: "IA que monitora, alerta e aciona sua rede de apoio em tempo real. Botão SOS silencioso sempre disponível.",
   },
@@ -42,7 +42,7 @@ const features = [
 ];
 
 const colorMap: Record<string, string> = {
-  emerald: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+  violet: "bg-violet-500/10 text-violet-400 border-violet-500/20",
   blue: "bg-blue-500/10 text-blue-400 border-blue-500/20",
   violet: "bg-violet-500/10 text-violet-400 border-violet-500/20",
   amber: "bg-amber-500/10 text-amber-400 border-amber-500/20",
@@ -60,7 +60,7 @@ export default function FeaturesSection() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <p className="text-emerald-400 font-semibold tracking-widest uppercase text-sm mb-4">Três Pilares. Uma Missão.</p>
+          <p className="text-violet-400 font-semibold tracking-widest uppercase text-sm mb-4">Três Pilares. Uma Missão.</p>
           <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-6">
             Tecnologia que <span className="text-gradient">salva vidas</span>
           </h2>
@@ -85,7 +85,7 @@ export default function FeaturesSection() {
                 <div className={`inline-flex p-3 rounded-xl border ${cls} mb-5`}>
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-100 mb-2 group-hover:text-emerald-400 transition-colors">{feat.title}</h3>
+                <h3 className="text-lg font-bold text-slate-100 mb-2 group-hover:text-violet-400 transition-colors">{feat.title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">{feat.description}</p>
               </motion.div>
             );

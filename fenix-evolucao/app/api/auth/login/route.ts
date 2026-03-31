@@ -4,7 +4,7 @@ export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://legado-api.onrender.com/api/v1";
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/_api/api/v1";
     
     // O endpoint FastAPI /auth/login espera JSON com campos "email" e "senha"
     const backendRes = await fetch(`${apiUrl}/auth/login`, {

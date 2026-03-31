@@ -65,8 +65,8 @@ export default function LoginPage() {
       >
         <div className="bg-slate-900/50 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl shadow-black/50 relative overflow-hidden">
           
-          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
-          <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
+          <div className="absolute -top-24 -right-24 w-48 h-48 bg-violet-500/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="text-center mb-8 relative z-10">
             <h1 className="text-2xl font-bold text-slate-50 tracking-tight mb-2">Acesso Restrito</h1>
@@ -89,7 +89,7 @@ export default function LoginPage() {
 
             <div className="space-y-4">
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-emerald-400 transition-colors">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-violet-400 transition-colors">
                   <Mail className="w-5 h-5" />
                 </div>
                 <input
@@ -98,12 +98,12 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Seu e-mail"
                   required
-                  className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-2xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all font-medium"
+                  className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-2xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/50 transition-all font-medium"
                 />
               </div>
 
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-emerald-400 transition-colors">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-violet-400 transition-colors">
                   <Lock className="w-5 h-5" />
                 </div>
                 <input
@@ -112,7 +112,7 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Sua senha"
                   required
-                  className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-2xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all font-medium"
+                  className="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-2xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/50 transition-all font-medium"
                 />
               </div>
             </div>
@@ -120,14 +120,14 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center items-center py-3.5 px-4 rounded-2xl text-slate-950 bg-emerald-500 hover:bg-emerald-400 font-bold tracking-wide transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] mt-2"
+              className="w-full flex justify-center items-center py-3.5 px-4 rounded-2xl text-slate-950 bg-violet-500 hover:bg-violet-400 font-bold tracking-wide transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] mt-2"
             >
               {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Autenticar Conexão"}
             </button>
           </form>
 
           <div className="mt-6 text-center text-sm text-slate-500 relative z-10">
-            Esqueceu sua senha? <Link href="#" className="text-emerald-400 hover:text-emerald-300 font-medium transition-colors">Recuperação Segura</Link>
+            Esqueceu sua senha? <Link href="#" className="text-violet-400 hover:text-violet-300 font-medium transition-colors">Recuperação Segura</Link>
           </div>
         </div>
       </motion.div>

@@ -10,12 +10,12 @@ const PILARES = [
     subtitulo: "Funciona sem internet",
     descricao: "O agressor pode cortar o Wi-Fi, quebrar o roteador, tirar o chip. Não importa. Nossa inteligência artificial roda direto no celular da mulher. Nenhum dado sai do dispositivo. Nunca.",
     stat: "Zero dados na nuvem",
-    cor: "emerald",
+    cor: "violet",
   },
   {
     icon: EyeOff,
     tag: "EXCLUSIVO",
-    titulo: "Modo Furtivo (Stealth)",
+    titulo: "Modo Furtivo (Sfuchsiath)",
     subtitulo: "Invisível ao agressor",
     descricao: "Se ele pegar o celular, não vai encontrar nenhum app de SOS. O Legado se disfarça como bloco de notas, calculadora ou app de receitas. A proteção continua ativa por baixo.",
     stat: "100% indetectável",
@@ -42,7 +42,7 @@ const PILARES = [
 ];
 
 const corClasses: Record<string, { border: string; bg: string; text: string; glow: string }> = {
-  emerald: { border: "border-emerald-500/30", bg: "bg-emerald-500/10", text: "text-emerald-400", glow: "shadow-emerald-900/20" },
+  violet: { border: "border-violet-500/30", bg: "bg-violet-500/10", text: "text-violet-400", glow: "shadow-violet-900/20" },
   violet: { border: "border-violet-500/30", bg: "bg-violet-500/10", text: "text-violet-400", glow: "shadow-violet-900/20" },
   amber: { border: "border-amber-500/30", bg: "bg-amber-500/10", text: "text-amber-400", glow: "shadow-amber-900/20" },
   sky: { border: "border-sky-500/30", bg: "bg-sky-500/10", text: "text-sky-400", glow: "shadow-sky-900/20" },
@@ -64,7 +64,7 @@ export default function InquebravelSection() {
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-slate-50 mb-5">
             Por que o Legado é{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-300 to-cyan-400">
               Inquebrável
             </span>
             ?
@@ -124,7 +124,7 @@ export default function InquebravelSection() {
             <span className="text-slate-600 mx-2">→</span>
             <span className="text-violet-400">DURANTE</span>
             <span className="text-slate-600 mx-2">→</span>
-            <span className="text-emerald-400">DEPOIS</span>
+            <span className="text-violet-400">DEPOIS</span>
           </p>
         </motion.div>
       </div>

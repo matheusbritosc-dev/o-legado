@@ -62,7 +62,7 @@ export default function HeroSection() {
             { value: "Zero", label: "Dados em Nuvem" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-emerald-400 mb-1">{stat.value}</div>
+              <div className="text-2xl md:text-3xl font-bold text-violet-400 mb-1">{stat.value}</div>
               <div className="text-xs md:text-sm text-slate-500">{stat.label}</div>
             </div>
           ))}

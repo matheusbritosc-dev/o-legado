@@ -118,12 +118,12 @@ export default function VagasPage() {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-400 text-sm font-medium mb-6">
             <ShieldCheck className="w-3.5 h-3.5" /> Empresas Verificadas pelo Legado
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4">
             Vagas{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-200">
               Seguras
             </span>
           </h1>
@@ -140,8 +140,8 @@ export default function VagasPage() {
             { icon: Heart, label: "Ambiente seguro", desc: "Zero tolerância a assédio" },
           ].map((item) => (
             <div key={item.label} className="flex items-start gap-3 bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4">
-              <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center flex-shrink-0">
-                <item.icon className="w-4 h-4 text-emerald-400" />
+              <div className="w-9 h-9 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
+                <item.icon className="w-4 h-4 text-violet-400" />
               </div>
               <div>
                 <p className="text-sm font-semibold text-slate-200">{item.label}</p>
@@ -160,7 +160,7 @@ export default function VagasPage() {
               value={busca}
               onChange={(e) => setBusca(e.target.value)}
               placeholder="Buscar por cargo, empresa ou cidade..."
-              className="w-full pl-11 pr-4 py-3 bg-slate-900/60 border border-white/10 hover:border-white/20 focus:border-emerald-500 rounded-xl text-slate-100 placeholder-slate-500 outline-none transition-all text-sm"
+              className="w-full pl-11 pr-4 py-3 bg-slate-900/60 border border-white/10 hover:border-white/20 focus:border-violet-500 rounded-xl text-slate-100 placeholder-slate-500 outline-none transition-all text-sm"
             />
           </div>
           <div className="flex gap-2 flex-wrap">
@@ -170,7 +170,7 @@ export default function VagasPage() {
                 onClick={() => setFiltro(f)}
                 className={`px-3 py-2 rounded-lg text-xs font-medium transition-all ${
                   filtro === f
-                    ? "bg-emerald-500 text-slate-950"
+                    ? "bg-violet-500 text-slate-950"
                     : "bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-slate-200"
                 }`}
               >
@@ -182,7 +182,7 @@ export default function VagasPage() {
 
         {/* Contador */}
         <p className="text-sm text-slate-500 mb-6">
-          <span className="text-emerald-400 font-bold">{vagasFiltradas.length}</span> vaga{vagasFiltradas.length !== 1 ? "s" : ""} encontrada{vagasFiltradas.length !== 1 ? "s" : ""}
+          <span className="text-violet-400 font-bold">{vagasFiltradas.length}</span> vaga{vagasFiltradas.length !== 1 ? "s" : ""} encontrada{vagasFiltradas.length !== 1 ? "s" : ""}
         </p>
 
         {/* Lista de Vagas */}
@@ -196,7 +196,7 @@ export default function VagasPage() {
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ delay: i * 0.05 }}
                 className={`bg-slate-900/50 backdrop-blur-xl border rounded-2xl overflow-hidden transition-all ${
-                  vaga.destaque ? "border-emerald-500/30" : "border-white/10"
+                  vaga.destaque ? "border-violet-500/30" : "border-white/10"
                 }`}
               >
                 {/* Card Header */}
@@ -205,16 +205,16 @@ export default function VagasPage() {
                   className="w-full text-left px-6 py-5 flex items-start gap-4 hover:bg-white/[0.02] transition-colors"
                 >
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                    vaga.destaque ? "bg-emerald-500/10 border border-emerald-500/20" : "bg-slate-800 border border-white/10"
+                    vaga.destaque ? "bg-violet-500/10 border border-violet-500/20" : "bg-slate-800 border border-white/10"
                   }`}>
-                    <Briefcase className={`w-5 h-5 ${vaga.destaque ? "text-emerald-400" : "text-slate-400"}`} />
+                    <Briefcase className={`w-5 h-5 ${vaga.destaque ? "text-violet-400" : "text-slate-400"}`} />
                   </div>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <h3 className="text-base font-bold text-slate-100 truncate">{vaga.cargo}</h3>
                       {vaga.destaque && (
-                        <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold flex-shrink-0">
+                        <span className="px-2 py-0.5 rounded-full bg-violet-500/20 text-violet-400 text-[10px] font-bold flex-shrink-0">
                           DESTAQUE
                         </span>
                       )}
@@ -225,7 +225,7 @@ export default function VagasPage() {
                       <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {vaga.tipo}</span>
                     </div>
                     <div className="flex items-center gap-2 mt-2">
-                      <span className="text-sm font-bold text-emerald-400">{vaga.salario}</span>
+                      <span className="text-sm font-bold text-violet-400">{vaga.salario}</span>
                       {vaga.verificada && (
                         <span className="flex items-center gap-1 text-[10px] text-blue-400">
                           <CheckCircle className="w-3 h-3" /> Verificada
@@ -253,7 +253,7 @@ export default function VagasPage() {
                             <ul className="space-y-1.5">
                               {vaga.requisitos.map((r) => (
                                 <li key={r} className="flex items-start gap-2 text-xs text-slate-300">
-                                  <span className="text-emerald-400 mt-0.5">•</span> {r}
+                                  <span className="text-violet-400 mt-0.5">•</span> {r}
                                 </li>
                               ))}
                             </ul>
@@ -283,7 +283,7 @@ export default function VagasPage() {
                             href={vaga.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition-all"
+                            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-violet-500 hover:bg-violet-400 text-slate-950 font-bold text-sm transition-all"
                           >
                             Candidatar-se <ExternalLink className="w-3.5 h-3.5" />
                           </a>
@@ -309,14 +309,14 @@ export default function VagasPage() {
 
         {/* CTA para empresas */}
         <div className="mt-16 text-center bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-          <Building2 className="w-10 h-10 text-emerald-400 mx-auto mb-4" />
+          <Building2 className="w-10 h-10 text-violet-400 mx-auto mb-4" />
           <h3 className="text-xl font-bold text-slate-100 mb-2">É uma empresa e quer fazer parte?</h3>
           <p className="text-slate-400 text-sm mb-6 max-w-md mx-auto">
             Cadastre sua empresa como parceira verificada do Legado e ajude mulheres a recomeçar com dignidade.
           </p>
           <a
             href="mailto:admin@legado.com?subject=Parceria%20Empresarial%20-%20Vagas%20Legado"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-violet-500 hover:bg-violet-400 text-slate-950 font-bold text-sm transition-all"
           >
             Quero ser empresa parceira
           </a>
