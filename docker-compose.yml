@@ -1,6 +1,24 @@
 version: '3.8'
 
 services:
+  api:
+    build: 
+      context: ./backend/fenix_evolucao
+      dockerfile: Dockerfile
+    container_name: fenix_api
+    restart: always # O container nunca morre! Sobrevive a boots do servidor
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/fenix_evolucao
+      # Outras variáveis serão criadas no .env da VPS 
+    env_file:
+      - .env # Usaremos um .env root na VPS para chaves
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - fenix_net
+
   db:
     image: postgres:16
     container_name: fenix_db
@@ -13,6 +31,12 @@ services:
       - "5432:5432"
     volumes:
       - fenix_data:/var/lib/postgresql/data
+    networks:
+      - fenix_net
+
+networks:
+  fenix_net:
+    driver: bridge
 
 volumes:
   fenix_data:
