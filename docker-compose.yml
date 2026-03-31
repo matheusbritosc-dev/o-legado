@@ -13,7 +13,7 @@ services:
     env_file:
       - .env # Usaremos um .env root na VPS para chaves
     ports:
-      - "8000:8000"
+      - "80:8000"
     depends_on:
       - db
     networks:
