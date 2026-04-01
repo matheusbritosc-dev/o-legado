@@ -35,7 +35,8 @@ export default function LoginPage() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "E-mail ou senha incorretos.");
+        const errorMsg = typeof data.error === 'string' ? data.error : (data.detail || "E-mail ou senha incorretos.");
+        throw new Error(errorMsg);
       }
 
       router.push("/dashboard");
@@ -43,7 +44,8 @@ export default function LoginPage() {
 
     } catch (err: any) {
       clearTimeout(wakeUpTimer);
-      setError(err.message || "Erro ao conectar com o servidor.");
+      const msg = err?.message || "Erro ao conectar com o servidor.";
+      setError(typeof msg === 'string' ? msg : "Erro ao conectar com o servidor.");
     } finally {
       setLoading(false);
       setWakingUp(false);
