@@ -1,21 +1,19 @@
-version: '3.8'
-
 services:
   api:
     build: 
       context: ./backend/fenix_evolucao
       dockerfile: Dockerfile
     container_name: fenix_api
-    restart: always # O container nunca morre! Sobrevive a boots do servidor
+    restart: always
     environment:
       - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/fenix_evolucao
-      # Outras variáveis serão criadas no .env da VPS 
     env_file:
-      - .env # Usaremos um .env root na VPS para chaves
+      - .env
     ports:
-      - "80:8000"
+      - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - fenix_net
 
@@ -31,6 +29,21 @@ services:
       - "5432:5432"
     volumes:
       - fenix_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fenix_net
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: fenix_tunnel
+    restart: always
+    command: tunnel --no-autoupdate --url http://api:8000
+    depends_on:
+      - api
     networks:
       - fenix_net
 
