@@ -22,11 +22,14 @@ export default function SOSPage() {
     };
   }, []);
 
-  // Shake detection (DeviceMotionEvent)
+  // Shake detection (DeviceMotionEvent) - Precisão Blindada
   useEffect(() => {
     let lastTime = 0;
     let lastX = 0, lastY = 0, lastZ = 0;
-    const shakeThreshold = 25; // Sensibilidade do chacoalhão
+    let shakeCount = 0;
+    let lastShakeDetection = 0;
+    const shakeThreshold = 25; // Sensibilidade
+    const requiredShakes = Number(localStorage.getItem("legado_shake_count") || "3");
 
     const handleMotion = (event: DeviceMotionEvent) => {
       const current = event.accelerationIncludingGravity;
@@ -40,9 +43,29 @@ export default function SOSPage() {
         const speed = Math.abs(current.x + current.y + current.z - lastX - lastY - lastZ) / diffTime * 10000;
 
         if (speed > shakeThreshold && !sending && !sent) {
-          // Detectou um chacoalhão violento
-          console.log("Shake detectado! Disparando SOS sfuchsiath...");
-          sendAlert();
+          // Detectou um movimento brusco
+          const now = Date.now();
+          
+          // Se o último chacoalhão foi há mais de 2.5 segundos, reseta o contador
+          if (now - lastShakeDetection > 2500) {
+            shakeCount = 1;
+          } else {
+            shakeCount++;
+          }
+          
+          lastShakeDetection = now;
+          console.log(`Shake ${shakeCount}/${requiredShakes} detectado!`);
+
+          // Feedback visual/tátil (opcional)
+          if (typeof navigator !== 'undefined' && navigator.vibrate) {
+            navigator.vibrate(100);
+          }
+
+          if (shakeCount >= requiredShakes) {
+            console.log("Limite de precisão atingido! Disparando SOS...");
+            sendAlert();
+            shakeCount = 0; // Reseta após disparar
+          }
         }
 
         lastX = current.x;
@@ -51,39 +74,31 @@ export default function SOSPage() {
       }
     };
 
-    // Pede permissão no iOS se necessário
-    if (typeof (DeviceMotionEvent as any).requestPermission === 'function') {
-      // Normalmente precisa de clique do usuário antes, então isso rodaria via botão.
-      // Aqui registramos passivamente caso a permissão já esteja dada (Android não exige).
-    }
-    
     window.addEventListener('devicemotion', handleMotion);
     return () => window.removeEventListener('devicemotion', handleMotion);
   }, [sending, sent]);
 
   const fallbackToSMS = (lat?: number, lon?: number) => {
-    const locStr = (lat && lon) ? `Loc: https://maps.google.com/?q=${lat},${lon}` : "Localizacao desconhecida.";
-    const message = encodeURIComponent(`URGENTE! SOS LEGADO. Preciso de ajuda imediata. ${locStr}`);
-    const emergencyNumber = "190"; // Ou numero do contato de emergencia extraido do perfil
+    const locStr = (lat && lon) ? `Mapa: https://maps.google.com/?q=${lat},${lon}` : "Localizacao indisponivel.";
+    const message = encodeURIComponent(`ALERTA LEGADO: Mulher em risco! ${locStr}`);
     
-    // O protocolo sms: abre o app de mensagens nativo, funcionando mesmo sem internet.
+    // Prioriza o número de monitoramento manual (Matheus) configurado
+    const emergencyNumber = localStorage.getItem("legado_emergency_number") || "190";
+    
     window.location.href = `sms:${emergencyNumber}?body=${message}`;
     setSending(false);
     setSent(true);
   };
 
-
   const sendAlert = () => {
     setSending(true);
     const doSend = (lat?: number, lon?: number) => {
       if (!navigator.onLine) {
-        // Se estiver offline, aborta o fetch e abre o SMS nativo imediatamente
-        console.log("Offline detectado: Redirecionando para SMS de emergência");
         fallbackToSMS(lat, lon);
         return;
       }
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/_api/api/v1";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
       fetch(`${apiUrl}/seguranca/sos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -94,8 +109,7 @@ export default function SOSPage() {
         setSent(true);
       })
       .catch((err) => {
-        // Fallback: Se o backend caiu (timeout/500) mesmo com internet, também usa o SMS
-        console.error("Falha no servidor, caindo pro SMS", err);
+        console.error("Falha no servidor, caindo pro SMS manual", err);
         fallbackToSMS(lat, lon);
       })
       .finally(() => { setSending(false); });

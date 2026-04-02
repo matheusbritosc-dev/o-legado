@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { CheckCircle2, BookOpen, Star, LogOut, Zap } from "lucide-react";
 
+import SOSSettings from "@/components/SOSSettings";
+
 export default function DashboardPage() {
   return (
     <div className="min-h-screen relative flex">
@@ -26,46 +28,51 @@ export default function DashboardPage() {
       </aside>
 
       {/* Main */}
-      <main className="flex-1 p-8 md:p-12 relative z-10">
+      <main className="flex-1 p-8 md:p-12 relative z-10 overflow-y-auto h-screen">
         <div className="mb-12">
           <h1 className="text-3xl font-bold text-slate-50 mb-1">Bem-vinda, Apoiadora Fundadora! 🌟</h1>
-          <p className="text-slate-400">Sua assinatura está ativa e apoiando vidas agora mesmo.</p>
+          <p className="text-slate-400 text-sm">Sua assinatura está ativa e apoiando vidas agora mesmo.</p>
         </div>
 
-        {/* Status card */}
-        <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 max-w-2xl mb-8 shadow-2xl shadow-black/50">
-          <div className="flex items-start justify-between mb-6 pb-6 border-b border-white/10">
-            <div>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wide mb-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" /> Ativo
-              </span>
-              <h2 className="text-xl font-bold text-slate-100">Plano Anual — Membro Fundadora</h2>
-              <p className="text-slate-500 text-sm mt-1">Renovação em 18/03/2027</p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl">
+          {/* Status card */}
+          <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl shadow-black/50 h-fit">
+            <div className="flex items-start justify-between mb-6 pb-6 border-b border-white/10">
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wide mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" /> Ativo
+                </span>
+                <h2 className="text-xl font-bold text-slate-100">Plano Anual — Membro Fundadora</h2>
+                <p className="text-slate-500 text-sm mt-1">Renovação em 18/03/2027</p>
+              </div>
+              <div className="text-right">
+                <p className="text-3xl font-extrabold text-slate-50">R$ 500</p>
+                <p className="text-slate-600 text-[10px]">Pago via Stripe · Mar 2026</p>
+              </div>
             </div>
-            <div className="text-right">
-              <p className="text-3xl font-extrabold text-slate-50">R$ 500</p>
-              <p className="text-slate-600 text-xs">Pago via Stripe · Mar 2026</p>
+
+            <h3 className="font-bold text-slate-300 mb-4 text-xs uppercase tracking-wide">Benefícios Desbloqueados</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                { title: "Escola de Pais", desc: "Aulas e trilhas gamificadas abertas.", link: "#" },
+                { title: "Tutor IA (Conselheiro)", desc: "Chat privado, sem nuvem. Acesse agora.", link: "/dashboard/chat" },
+              ].map((b) => (
+                <Link key={b.title} href={b.link} className="block bg-black/40 border border-white/10 rounded-2xl p-4 hover:bg-black/60 transition-colors">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Zap className="w-4 h-4 text-violet-400" />
+                    <h4 className="font-bold text-slate-200 text-sm">{b.title}</h4>
+                  </div>
+                  <p className="text-slate-500 text-[10px] mb-3">{b.desc}</p>
+                  <span className="text-violet-400 hover:text-violet-300 text-[10px] font-semibold transition-colors">
+                    Acessar →
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
 
-          <h3 className="font-bold text-slate-300 mb-4 text-sm uppercase tracking-wide">Benefícios Desbloqueados</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              { title: "Escola de Pais", desc: "Aulas e trilhas gamificadas abertas.", link: "#" },
-              { title: "Tutor IA (Conselheiro)", desc: "Chat privado, sem nuvem. Acesse agora.", link: "/dashboard/chat" },
-            ].map((b) => (
-              <Link key={b.title} href={b.link} className="block bg-black/40 border border-white/10 rounded-2xl p-4 hover:bg-black/60 transition-colors">
-                <div className="flex items-center gap-2 mb-2">
-                  <Zap className="w-4 h-4 text-violet-400" />
-                  <h4 className="font-bold text-slate-200 text-sm">{b.title}</h4>
-                </div>
-                <p className="text-slate-500 text-xs mb-3">{b.desc}</p>
-                <span className="text-violet-400 hover:text-violet-300 text-xs font-semibold transition-colors">
-                  Acessar →
-                </span>
-              </Link>
-            ))}
-          </div>
+          {/* SOS Settings Section */}
+          <SOSSettings />
         </div>
       </main>
     </div>
