@@ -11,18 +11,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [wakingUp, setWakingUp] = useState(false);
+
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
-    setWakingUp(false);
-
-    // Timeout para avisar que o servidor está acordando (Cold Start Render)
-    const wakeUpTimer = setTimeout(() => {
-      setWakingUp(true);
-    }, 4500);
 
     try {
       const res = await fetch("/api/auth/login", {
@@ -30,8 +24,6 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
-      clearTimeout(wakeUpTimer);
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -43,12 +35,10 @@ export default function LoginPage() {
       router.refresh();
 
     } catch (err: any) {
-      clearTimeout(wakeUpTimer);
-      const msg = err?.message || "Erro ao conectar com o servidor.";
-      setError(typeof msg === 'string' ? msg : "Erro ao conectar com o servidor.");
+      const msg = err?.message || "Erro ao conectar.";
+      setError(typeof msg === 'string' ? msg : "Erro ao conectar.");
     } finally {
       setLoading(false);
-      setWakingUp(false);
     }
   };
 
@@ -83,11 +73,7 @@ export default function LoginPage() {
               </div>
             )}
 
-            {loading && wakingUp && (
-              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] sm:text-xs text-center font-medium animate-pulse">
-                O servidor seguro está sendo despertado... Aguarde 30s.
-              </div>
-            )}
+
 
             <div className="space-y-4">
               <div className="relative group">
