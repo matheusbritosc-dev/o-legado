@@ -29,19 +29,8 @@ export default function InteractiveBackground() {
       {/* Fallback color/gradient if video doesn't load immediately */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-[#0a0f1c] to-slate-950" />
 
-      {/* 4K Background Video */}
-      {/* Assuming the user will place "legado_comet_bg.mp4" in public/assets/ */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-60"
-        src="/assets/legado_comet_bg.mp4"
-      />
-
-      {/* Depth Overlay (Glassmorphism frost on the video itself) */}
-      <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-[3px]" />
+      {/* Ambient dark overlay */}
+      <div className="absolute inset-0 bg-slate-950/40" />
 
       {/* Mouse Tracking Radial Glow (Emerald + subtle Amber mix) */}
       {mounted && (

@@ -21,7 +21,7 @@ export async function POST(request: Request) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, senha: password }),
-          signal: AbortSignal.timeout(8000), // 8 segundos de timeout
+          signal: AbortSignal.timeout(3000), // 3 segundos - demo mode ativa rápido
         });
 
         if (backendRes.ok) {
