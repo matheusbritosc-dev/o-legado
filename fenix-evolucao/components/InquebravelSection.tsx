@@ -43,7 +43,6 @@ const PILARES = [
 
 const corClasses: Record<string, { border: string; bg: string; text: string; glow: string }> = {
   violet: { border: "border-violet-500/30", bg: "bg-violet-500/10", text: "text-violet-400", glow: "shadow-violet-900/20" },
-  violet: { border: "border-violet-500/30", bg: "bg-violet-500/10", text: "text-violet-400", glow: "shadow-violet-900/20" },
   amber: { border: "border-amber-500/30", bg: "bg-amber-500/10", text: "text-amber-400", glow: "shadow-amber-900/20" },
   sky: { border: "border-sky-500/30", bg: "bg-sky-500/10", text: "text-sky-400", glow: "shadow-sky-900/20" },
 };
