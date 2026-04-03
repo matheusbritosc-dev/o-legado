@@ -1,9 +1,18 @@
+"use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { CheckCircle2, BookOpen, Star, LogOut, Zap } from "lucide-react";
+import { CheckCircle2, BookOpen, Star, LogOut, Zap, Heart } from "lucide-react";
+import { motion } from "framer-motion";
 
 import SOSSettings from "@/components/SOSSettings";
 
 export default function DashboardPage() {
+  const [userTag, setUserTag] = useState<string | null>(null);
+
+  useEffect(() => {
+    setUserTag(localStorage.getItem("legado_user_tag"));
+  }, []);
+
   return (
     <div className="min-h-screen relative flex">
       {/* Sidebar */}
@@ -29,6 +38,22 @@ export default function DashboardPage() {
 
       {/* Main */}
       <main className="flex-1 p-8 md:p-12 relative z-10 overflow-y-auto h-screen">
+        {userTag === "JUSTICEIRA" && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8 p-4 rounded-2xl bg-gradient-to-r from-rose-500/20 to-violet-500/10 border border-rose-500/30 flex items-center gap-4"
+          >
+            <div className="w-12 h-12 rounded-xl bg-rose-500/20 flex items-center justify-center shrink-0">
+              <Heart className="w-6 h-6 text-rose-400 fill-rose-500/20" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-white leading-tight">Bem-vinda de volta, Justiceira! 🛡️</h3>
+              <p className="text-slate-400 text-xs">Sua visão técnica é essencial para aprimorarmos nossa rede de proteção.</p>
+            </div>
+          </motion.div>
+        )}
+
         <div className="mb-12">
           <h1 className="text-3xl font-bold text-slate-50 mb-1">Bem-vinda, Apoiadora Fundadora! 🌟</h1>
           <p className="text-slate-400 text-sm">Sua assinatura está ativa e apoiando vidas agora mesmo.</p>
