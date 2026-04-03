@@ -83,7 +83,7 @@ export default function SOSPage() {
     const message = encodeURIComponent(`ALERTA LEGADO: Mulher em risco! ${locStr}`);
     
     // Prioriza o número de monitoramento manual (Matheus) configurado
-    const emergencyNumber = localStorage.getItem("legado_emergency_number") || "190";
+    const emergencyNumber = localStorage.getItem("legado_emergency_number") || "62996768860";
     
     window.location.href = `sms:${emergencyNumber}?body=${message}`;
     setSending(false);

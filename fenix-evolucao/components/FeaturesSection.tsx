@@ -5,39 +5,39 @@ import { Shield, BookOpen, HeartHandshake, Brain, Lock, Globe } from "lucide-rea
 const features = [
   {
     icon: Shield,
+    color: "rose",
+    title: "SOS de Alta Precisão",
+    description: "Tecnologia Multi-Shake: 3 chacoalhadas rápidas acionam a rede. Sem disparos acidentais, precisão total.",
+  },
+  {
+    icon: Brain,
     color: "violet",
-    title: "Proteção Real",
-    description: "IA que monitora, alerta e aciona sua rede de apoio em tempo real. Botão SOS silencioso sempre disponível.",
+    title: "Conselheiro IA (NVIDIA)",
+    description: "Inteligência Artificial de ponta para acolhimento e orientação jurídica imediata, 24 horas por dia.",
   },
   {
     icon: BookOpen,
     color: "blue",
-    title: "Escola de Pais",
-    description: "Trilhas gamificadas ensinando empatia, respeito e inteligência emocional desde o berço.",
-  },
-  {
-    icon: HeartHandshake,
-    color: "violet",
-    title: "Reinserção Digna",
-    description: "Matching de vagas ocultas e encaminhamento para oportunidades reais com anonimato total.",
-  },
-  {
-    icon: Brain,
-    color: "amber",
-    title: "Tutor IA Local",
-    description: "Conselheiro IA rodando localmente — sem nuvem, sem rastreamento, com sigilo absoluto.",
+    title: "Prevenção Geracional",
+    description: "Escola de Pais: trilhas educativas para quebrar o ciclo da violência antes que ele comece.",
   },
   {
     icon: Lock,
+    color: "amber",
+    title: "Rastro Jurídico Blindado",
+    description: "Toda omissão é documentada. Geramos provas digitais para que a rede de apoio seja responsabilizada.",
+  },
+  {
+    icon: Shield,
     color: "rose",
-    title: "E2EE nativo",
-    description: "Seus dados são criptografados no seu dispositivo antes de tocar qualquer servidor.",
+    title: "Monitoramento Manual",
+    description: "No piloto, os alertas vão para nossa central de triagem humana, garantindo resposta imediata.",
   },
   {
     icon: Globe,
     color: "cyan",
-    title: "Soberania de Dados",
-    description: "100% LGPD compliant. Infraestrutura local, sem dependência de big techs estrangeiras.",
+    title: "Independência de APP Store",
+    description: "PWA: Funciona direto no navegador, não deixa rastros na loja de aplicativos e é impossível de deletar.",
   },
 ];
 

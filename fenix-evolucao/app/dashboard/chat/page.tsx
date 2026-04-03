@@ -30,8 +30,8 @@ export default function ChatIAPage() {
     setLoading(true);
 
     try {
-      // Endpoint que conecta com o Nemotron/FastAPI
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/_api/api/v1"}/chat/seguro`, {
+      // Endpoint inteligente via Next.js Proxy (NVIDIA NIM)
+      const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mensagem: userMsg })
@@ -39,21 +39,18 @@ export default function ChatIAPage() {
 
       if (!res.ok) throw new Error("Falha na comunicação cifrada.");
 
-      // Streaming Effect (Simulado no frontend se o backend não retornar stream real agota)
       const data = await res.json();
       
-      setMessages(prev => [...prev, { role: "system", content: data.resposta || "Processando protocolo seguro..." }]);
+      setMessages(prev => [...prev, { role: "system", content: data.resposta || "Protocolo de resposta não recebido." }]);
+
     } catch (err) {
-      // Mock de resposta para fins de demonstração visual se a API estiver desligada
-      setTimeout(() => {
-        setMessages(prev => [...prev, { 
-          role: "system", 
-          content: "Entendo profundamente o que você está dizendo. O mais importante agora é a sua segurança física. Você tem acesso à sua documentação nesse momento?" 
-        }]);
-        setLoading(false);
-      }, 1500);
+      console.error("Chat error:", err);
+      // Se der erro real na API, aí sim mostramos um alerta de sistema
+      setMessages(prev => [...prev, { 
+        role: "system", 
+        content: "⚠️ A conexão direta com o Conselheiro foi interrompida. Por favor, acione o SOS se estiver em risco imediato ou tente novamente em instantes." 
+      }]);
     } finally {
-      // Quando for stream real, isso muda
       setLoading(false); 
     }
   };

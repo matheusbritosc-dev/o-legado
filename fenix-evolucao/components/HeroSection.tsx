@@ -14,37 +14,38 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 text-sm font-medium mb-8">
-            <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
-            🎉 100 Primeiros Cadastros: 6 Meses Grátis
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-300 text-sm font-medium mb-8">
+            <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+            Lançamento: Piloto Governamental - Goiás 2026
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-8">
-            <span className="text-slate-50">Nenhuma Mulher</span>
+            <span className="text-slate-50">Sua Prefeitura Atende.</span>
             <br />
-            <span className="text-gradient">Deve Caminhar</span>
+            <span className="text-gradient">Mas Sem Rastro,</span>
             <br />
-            <span className="text-slate-50">com Medo.</span>
+            <span className="text-slate-50">é Omissão.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-            O Legado une inteligência artificial de nível militar com educação de base e reinserção social
-            para acabar com a violência na raiz — hoje e nas próximas gerações.
+          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+            O Legado acaba com a "Omissão Documentada". Nossa tecnologia de IA e SOS gera rastros jurídicos 
+            blindados, forçando a rede de apoio a agir ou responder judicialmente.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/pix"
-              className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-violet-600 hover:bg-violet-500 text-white font-bold text-lg transition-all duration-200 shadow-xl shadow-violet-600/30 hover:-translate-y-0.5"
+            <a
+              href="https://wa.me/5562998485984"
+              target="_blank"
+              className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg transition-all duration-200 shadow-xl shadow-emerald-600/30 hover:-translate-y-0.5"
             >
-              Garantir Minha Vaga (100% Grátis)
+              Agendar Reunião VIP (Secretarias)
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
             <Link
-              href="/manifesto"
+              href="/login"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-slate-100 font-semibold text-lg transition-all duration-200 hover:-translate-y-0.5"
             >
-              Leia o Manifesto
+              Acessar Piloto (Demo)
             </Link>
           </div>
         </motion.div>
