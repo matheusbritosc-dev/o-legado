@@ -1,17 +1,19 @@
-"use client";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Lock, Mail, Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { ArrowLeft, Lock, Mail, Loader2, Heart } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function LoginPage() {
+function LoginContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const ref = searchParams.get("ref");
+  const isJusticeira = ref === "justiceiras";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,6 +21,11 @@ export default function LoginPage() {
     setError("");
 
     try {
+      // Se for Justiceira, salvamos a flag no localStorage para uso no Dashboard
+      if (isJusticeira) {
+        localStorage.setItem("legado_user_tag", "JUSTICEIRA");
+      }
+
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -61,8 +68,23 @@ export default function LoginPage() {
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-violet-500/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="text-center mb-8 relative z-10">
-            <h1 className="text-2xl font-bold text-slate-50 tracking-tight mb-2">Acesso Restrito</h1>
-            <p className="text-sm text-slate-400">Insira suas credenciais blindadas.</p>
+            {isJusticeira && (
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-[10px] font-bold uppercase tracking-widest mb-4"
+              >
+                <Heart className="w-3 h-3 fill-rose-500" /> Convite Especial Ativo
+              </motion.div>
+            )}
+            <h1 className="text-2xl font-bold text-slate-50 tracking-tight mb-2">
+              {isJusticeira ? "Bem-vinda, Justiceira! 🛡️" : "Acesso Restrito"}
+            </h1>
+            <p className="text-sm text-slate-400">
+              {isJusticeira 
+                ? "Sua tecnologia de proteção está pronta para ser ativada."
+                : "Insira suas credenciais blindadas."}
+            </p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-5 relative z-10">
@@ -72,8 +94,6 @@ export default function LoginPage() {
                 {error}
               </div>
             )}
-
-
 
             <div className="space-y-4">
               <div className="relative group">
@@ -110,7 +130,7 @@ export default function LoginPage() {
               disabled={loading}
               className="w-full flex justify-center items-center py-3.5 px-4 rounded-2xl text-slate-950 bg-violet-500 hover:bg-violet-400 font-bold tracking-wide transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] mt-2"
             >
-              {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Autenticar Conexão"}
+              {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (isJusticeira ? "Ativar Meu Acesso VIP" : "Autenticar Conexão")}
             </button>
           </form>
 
@@ -120,5 +140,13 @@ export default function LoginPage() {
         </div>
       </motion.div>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">Carregando portal de acesso...</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }
