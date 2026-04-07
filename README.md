@@ -1,90 +1,73 @@
 <div align="center">
 
-# 🦅 PhoenixGov — Sistema de Reinserção Social Ativa
+# ⚔️ O Legado — Proteção, Evolução e Rastro Jurídico
 
-**Inteligência de Dados e Tecnologia no Combate à Reincidência Criminal através da Empregabilidade.**
-Desenvolvido como Prova de Conceito (MVP) para o **Governo do Estado de Goiás**.
+**Acabando com a "Omissão Documentada" através de Inteligência Artificial e Vigilância Cidadã Blindada.**
+Desenvolvido como uma solução robusta para a proteção de grupos vulneráveis e responsabilização institucional.
 
-[![React](https://img.shields.io/badge/Frontend-React_&_Tailwind-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Next.js](https://img.shields.io/badge/Frontend-Next.js_14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
-[![Python](https://img.shields.io/badge/IA_&_Dados-Python-3776AB?style=for-the-badge&logo=python)](https://python.org/)
+[![Security](https://img.shields.io/badge/Security-AES--256_Encryption-violet?style=for-the-badge&logo=speedtest)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 
 </div>
 
 ---
 
-## 📊 O Desafio Público & Nossa Solução GovTech
+## 🛡️ A Missão: Rastro Jurídico Contra a Omissão
 
-A reincidência criminal é um dos maiores desafios para a Segurança Pública e o Sistema Penitenciário. O **PhoenixGov** atua não apenas como uma plataforma, mas como uma **política pública digitalizada**, focada em **conectar egressos do sistema prisional a oportunidades reais de emprego** em empresas parceiras, utilizando cruzamento inteligente de dados.
+O **O Legado** não é apenas uma plataforma de segurança; é um ecossistema de rastro jurídico blindado. Em muitos casos, prefeituras e secretarias "atendem" chamados, mas a falta de evidências processáveis gera o que chamamos de **Omissão Documentada**.
 
-### 💡 Impacto Direto para Governos e Prefeituras:
-1. **Redução Preditiva da Criminalidade:** A empregabilidade comprovadamente quebra o ciclo de reincidência, reduzindo os custos do Estado com o sistema carcerário de forma escalável.
-2. **Ecossistema Público-Privado:** Facilita a adesão de centenas de empresas privadas que buscam promover impacto social e cumprir cotas ou programas de incentivo governamental.
-3. **Decisões Baseadas em Dados (Data-Driven):** Fornece painéis de controle governamentais robustos para o acompanhamento em tempo real de métricas de sucesso, histórico de vagas e *matches* efetivados pelos egressos.
+Nossa tecnologia força a rede de apoio a agir, gerando provas técnicas que não podem ser ignoradas ou apagadas, garantindo que o Estado cumpra seu papel ou responda judicialmente.
 
----
-
-## ⚡ Funcionalidades Tecnológicas (MVP)
-
-- 📈 **Dashboard Governamental Inteligente:** Visão panorâmica de métricas gerenciais (Egressos monitorados, Vagas disponíveis, Matches efetivados).
-- 🤝 **Inteligência de Matching (Smart Algorithm):** Sistema que cruza habilidades profissionais, geolocalização e escolaridade para sugerir as oportunidades mais adequadas, aumentando exponencialmente a probabilidade de contratação.
-- 🏢 **Hub de Oportunidades:** Cadastro simplificado para empresas parceiras ofertarem vagas de forma direta e permanentemente auditável pelo poder público.
-- 📱 **Interface Fluida e Acessível:** Design responsivo e focado na usabilidade, garantindo aderência tanto para gestores públicos (desktop) quanto para os egressos (mobile).
+### 💡 Pilares do Projeto:
+1. **Rastro Jurídico Blindado:** Conversas, localizações e alertas SOS são criptografados e registrados de forma a servir como prova legal imediata.
+2. **IA de Monitoramento Preditivo:** Algoritmos que analisam sinais de risco antes que a agressão ocorra.
+3. **Foco em Privacidade Extrema:** Arquitetura "Zero Cloud Data" para garantir que informações sensíveis nunca vazem.
 
 ---
 
-## 🏗️ Arquitetura e Stack Tecnológico
+## ⚡ Funcionalidades de Elite
 
-O sistema foi modularizado para permitir alta escalabilidade nacional e fácil integração (API-First):
-
-* **Backend:** Python, FastAPI, Banco de Dados Relacional (SQLite no MVP, preparado estruturalmente para PostgreSQL).
-* **Frontend:** React, Vite, Tailwind CSS.
+- 🆘 **SOS Furtivo:** Acionamento de emergência que não deixa rastros no aparelho e notifica a rede de proteção em milissegundos.
+- 📉 **Dashboard de Monitoramento:** Painéis para gestores públicos com métricas de tempo de resposta e eficácia da proteção.
+- 🔐 **Criptografia Militar:** Todo o tráfego de dados é protegido por camadas AES-256 e protocolos de segurança avançados.
 
 ---
 
-## 🚀 Como Executar o Projeto Localmente
+## 🏗️ Stack Tecnológico
+
+- **Frontend:** Next.js 14, React, Tailwind CSS, Framer Motion (para micro-interações fluidas).
+- **Backend:** Python, FastAPI, SQLite (Escalável para PostgreSQL).
+- **Infra:** Dockerized para deploy rápido e isolamento de dados.
+
+---
+
+## 🚀 Como Executar o Piloto
 
 ### Pré-requisitos
+- **Node.js 18+**
 - **Python 3.10+**
-- **Node.js 16+**
+- **Docker** (Opcional)
 
-### 1. Inicializando o Backend (API)
+### 1. Backend (API)
 ```bash
 cd backend
 pip install -r requirements.txt
-# (Opcional) Popula o banco com dados governamentais de teste:
-python seed.py  
 uvicorn main:app --reload
 ```
-📍 **Servidor rodando em:** `http://localhost:8000`  
-📚 **Documentação Interativa da API:** `http://localhost:8000/docs`
 
-### 2. Inicializando o Frontend (Web Interface)
-Abra uma nova aba em seu terminal e execute:
+### 2. Frontend (Next.js)
 ```bash
-cd frontend
+cd fenix-evolucao
 npm install
 npm run dev
 ```
-📍 **Acesse a aplicação em:** `http://localhost:5173`
-
----
-
-## 🔐 Credenciais de Acesso (Ambiente de Demonstração)
-
-Acesse o sistema com os perfis de homologação abaixo para explorar as exclusividades governamentais e do usuário padrão:
-
-| Perfil | E-mail de Acesso | Senha |
-|---|---|---|
-| **Administração Pública** | `admin@goias.gov.br` | `admin123` |
-| **Egresso (Exemplo)** | `egresso0@gmail.com` | `123456` |
 
 ---
 
 <div align="center">
 
-**Projeto desenvolvido para maximizar a reinserção, resgatar a cidadania e construir um ecossistema mais seguro e repleto de oportunidades.**
-
-*Iniciativa GovTech — Governo de Goiás* 🏛️
+**Proteção · Evolução · Esperança**
+*Lançamento Piloto — Goiás 2026*
 
 </div>
