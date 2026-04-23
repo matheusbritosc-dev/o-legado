@@ -15,6 +15,7 @@ class SOSRequest(BaseModel):
     latitude: Optional[float] = None
     longitude: Optional[float] = None
     precisao_metros: Optional[float] = None
+    emergency_number: Optional[str] = None
 
 @router.post("/sos")
 async def acionar_panico(
@@ -31,14 +32,15 @@ async def acionar_panico(
         usuario_id=current_user.id,
         latitude=request.latitude,
         longitude=request.longitude,
-        precisao_metros=request.precisao_metros
+        precisao_metros=request.precisao_metros,
+        telefone_notificado=request.emergency_number
     )
     db.add(novo_alerta)
     await db.commit()
     await db.refresh(novo_alerta)
     
     # Executa os envios webhooks/SMS em background para não bloquear a resposta imediata
-    background_tasks.add_task(disparar_notificacoes_emergencia, novo_alerta)
+    background_tasks.add_task(disparar_notificacoes_emergencia, novo_alerta, request.emergency_number)
     
     # Atualiza banco assíncronamente após as notificações
     # Isso seria feito dentro da task idealmente, mas para escopo de MVP:

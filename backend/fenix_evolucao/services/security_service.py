@@ -1,5 +1,5 @@
 import math
-from typing import List
+from typing import List, Optional
 from models.seguranca import MedidaProtetiva, AlertaSeguranca
 
 def calcular_distancia_haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
@@ -43,7 +43,7 @@ async def verificar_geofencing(lat_atual: float, lon_atual: float, medidas: List
 from services.whatsapp_service import whatsapp_service
 import asyncio
 
-async def disparar_notificacoes_emergencia(alerta: AlertaSeguranca):
+async def disparar_notificacoes_emergencia(alerta: AlertaSeguranca, numero_dinamico: Optional[str] = None):
     """
     Dispara notificações reais via WhatsApp Cloud API para a rede de apoio da usuária
     e painéis de controle.
@@ -53,27 +53,31 @@ async def disparar_notificacoes_emergencia(alerta: AlertaSeguranca):
     
     # Monta a mensagem estruturada
     mensagem = (
-        f"🚨 *ALERTA DE EMERGÊNCIA - O LEGADO* 🚨\n\n"
-        f"A usuária portadora deste ID acionou o Botão de Pânico Invisível.\n\n"
-        f"📍 *Coordenadas:* https://www.google.com/maps/search/?api=1&query={alerta.latitude},{alerta.longitude}\n"
-        f"⏱️ *Precisão:* {alerta.precisao_metros} metros\n\n"
-        f"_Por favor, tente contato. Se não houver resposta, acione o 190._"
+        f"🚨 *ALERTA MÁXIMO DE SEGURANÇA - O LEGADO* 🚨\n\n"
+        f"⚠️ *SITUAÇÃO DE RISCO IMINENTE*\n"
+        f"Uma mulher sob a proteção do sistema O Legado acaba de acionar o Botão de Pânico.\n\n"
+        f"📍 *LOCALIZAÇÃO EXATA (Alta Precisão):*\n"
+        f"https://www.google.com/maps/search/?api=1&query={alerta.latitude},{alerta.longitude}\n"
+        f"🎯 *Margem de erro (Raio):* {alerta.precisao_metros} metros\n\n"
+        f"⚖️ *PROTOCOLO DE AÇÃO IMEDIATA:*\n"
+        f"1. Tente contato imediato com a vítima.\n"
+        f"2. Em caso de silêncio ou caixa postal, acione a POLÍCIA MILITAR (190) IMEDIATAMENTE repassando as coordenadas acima.\n\n"
+        f"_Este é um alerta automatizado de segurança e proteção à vida. Aja com urgência._"
     )
     
-    # TODO: Em produção, buscar o telefone da Rede de Apoio ou SSP no banco de dados
-    # Para testes/alpha, envia para um número de teste configurado na variável META_TEST_NUMBER ou falha graciosa.
     import os
-    numero_destino = os.getenv("META_TEST_NUMBER", "")
+    # Prioridade: 1. Numero enviado pelo frontend, 2. Variável de ambiente fallback
+    numero_destino = numero_dinamico or os.getenv("META_TEST_NUMBER", "")
     
     if numero_destino:
         print(f"📲 Tentando enviar WhatsApp via Meta API para {numero_destino}...")
         sucesso = await whatsapp_service.enviar_mensagem(numero_destino, mensagem)
         if sucesso:
-            print("✅ WhatsApp entregue com sucesso.")
+            print(f"✅ WhatsApp entregue com sucesso para {numero_destino}.")
         else:
-            print("❌ Falha no envio do WhatsApp (verifique as chaves e o template da Meta).")
+            print(f"❌ Falha no envio do WhatsApp para {numero_destino} (verifique as chaves e o template da Meta).")
     else:
-        print("⚠️ Variável META_TEST_NUMBER ausente. Simulando envio de SMS/Webhook...")
+        print("⚠️ Nenhum número de destino configurado (nem no frontend, nem no .env).")
     
     alerta.notificacoes_enviadas = True
     return True

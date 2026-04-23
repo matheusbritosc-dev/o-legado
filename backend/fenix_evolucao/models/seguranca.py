@@ -14,6 +14,7 @@ class AlertaSeguranca(Base):
     longitude = Column(Float, nullable=True)
     precisao_metros = Column(Float, nullable=True)
     status = Column(String(50), default="ATIVO") # ATIVO, RESOLVIDO, FALSO_ALARME
+    telefone_notificado = Column(String(20), nullable=True)
     notificacoes_enviadas = Column(Boolean, default=False)
     criado_em = Column(TIMESTAMP(timezone=True), server_default=func.now())
 
