@@ -72,7 +72,7 @@ export default function DashboardPage() {
               </div>
               <div className="text-right">
                 <p className="text-3xl font-extrabold text-slate-50">R$ 500</p>
-                <p className="text-slate-600 text-[10px]">Pago via Stripe · Mar 2026</p>
+                <p className="text-slate-600 text-[10px]">PIX via Mercado Pago</p>
               </div>
             </div>
 
@@ -81,6 +81,7 @@ export default function DashboardPage() {
               {[
                 { title: "Escola de Pais", desc: "Aulas e trilhas gamificadas abertas.", link: "/escola" },
                 { title: "Tutor IA (Conselheiro)", desc: "Chat privado, sem nuvem. Acesse agora.", link: "/dashboard/chat" },
+                { title: "Geofencing", desc: "Zonas de risco e monitoramento contínuo de localização.", link: "/geofencing" },
               ].map((b) => (
                 <Link key={b.title} href={b.link} className="block bg-black/40 border border-white/10 rounded-2xl p-4 hover:bg-black/60 transition-colors">
                   <div className="flex items-center gap-2 mb-2">
@@ -102,7 +103,7 @@ export default function DashboardPage() {
 
         {/* Suporte VIP Floating Button */}
         <a
-          href="https://wa.me/5562998485984"
+          href="https://wa.me/5562996768860"
           target="_blank"
           className="fixed bottom-8 right-8 z-[100] flex items-center gap-3 px-6 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl shadow-2xl shadow-emerald-600/30 transition-all hover:-translate-y-1 group animate-bounce-slow"
         >
