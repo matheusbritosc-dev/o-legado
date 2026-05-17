@@ -1,24 +1,33 @@
+"""
+Serviço de Criptografia — O Legado
+Implementa AES-256 (via Fernet) para campos sensíveis (telefone, relatos).
+"""
+import logging
 from cryptography.fernet import Fernet
 from config import settings
 
-# Inicia o cifrador usando a chave segura de 256 bits (32 bytes em base64)
-# Na prática, usar AES-128 via Fernet é considerado seguro, mas se requerimento estrito de AES-256 for necessário,
-# a bibliotecas pyca/cryptography usam suporte interno dependendo da key. O Fernet usa AES-128 em modo CBC.
-# Para AES-256 GCM direto, seria necessário usar cryptography.hazmat.primitives.ciphers.aead.AESGCM
-# Para simplificar mantendo altíssima segurança:
+logger = logging.getLogger(__name__)
+
+# Carrega a chave AES-256 do config (.env)
+# A chave precisa ser base64 url-safe (32 bytes). Ex: Fernet.generate_key()
 try:
-    f = Fernet(settings.ENCRYPTION_KEY)
-except Exception:
-    # Fallback key para dev local se ENCRYPTION_KEY não for valid base64 32/bytes
-    fallback = Fernet.generate_key()
-    f = Fernet(fallback)
+    _cipher = Fernet(settings.ENCRYPTION_KEY.encode('utf-8'))
+except Exception as e:
+    logger.error(f"❌ ENCRYPTION_KEY inválida: {e}")
+    raise RuntimeError("ENCRYPTION_KEY inválida. Corrija o .env antes de subir o servidor.")
 
-def encrypt_text(text: str) -> str:
-    if not text:
-        return ""
-    return f.encrypt(text.encode('utf-8')).decode('utf-8')
+def encrypt_str(texto: str) -> str:
+    """Criptografa uma string usando AES-256."""
+    if not texto:
+        return texto
+    return _cipher.encrypt(texto.encode("utf-8")).decode("utf-8")
 
-def decrypt_text(cipher_text: str) -> str:
-    if not cipher_text:
-        return ""
-    return f.decrypt(cipher_text.encode('utf-8')).decode('utf-8')
+def decrypt_str(texto_criptografado: str) -> str:
+    """Decriptografa uma string usando AES-256."""
+    if not texto_criptografado:
+        return texto_criptografado
+    try:
+        return _cipher.decrypt(texto_criptografado.encode("utf-8")).decode("utf-8")
+    except Exception as e:
+        logger.error("Erro ao descriptografar dado sensível.")
+        return "[ERRO DE DECRIPTOGRAFIA]"
