@@ -41,7 +41,7 @@ async def acionar_panico(
     db: AsyncSession = Depends(get_db)
 ):
     """
-    Endpoint ultra-rápido para acionamento do Botão de Pânico.
+    Endpoint autenticado para acionamento do Botão de Pânico.
     Salva o alerta e despacha as notificações de alta prioridade em background.
     """
     novo_alerta = AlertaSeguranca(
@@ -55,13 +55,41 @@ async def acionar_panico(
     await db.commit()
     await db.refresh(novo_alerta)
     
-    # Executa os envios webhooks/SMS em background para não bloquear a resposta imediata
     background_tasks.add_task(disparar_notificacoes_emergencia, novo_alerta, request.emergency_number)
     
-    # Atualiza banco assíncronamente após as notificações
     novo_alerta.notificacoes_enviadas = True
     await db.commit()
     
+    return {"status": "SOS_ATIVO", "alerta_id": novo_alerta.id, "mensagem": "Rede de apoio acionada."}
+
+
+@router.post("/sos-publico")
+async def acionar_panico_publico(
+    request: SOSRequest,
+    background_tasks: BackgroundTasks,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Endpoint SOS PÚBLICO — NÃO exige login.
+    Para mulheres que acessam a página de emergência sem estar autenticadas.
+    Salva o alerta e dispara notificações mesmo sem identificação da usuária.
+    """
+    novo_alerta = AlertaSeguranca(
+        usuario_id=None,  # Sem usuária identificada
+        latitude=request.latitude,
+        longitude=request.longitude,
+        precisao_metros=request.precisao_metros,
+        telefone_notificado=request.emergency_number
+    )
+    db.add(novo_alerta)
+    await db.commit()
+    await db.refresh(novo_alerta)
+
+    background_tasks.add_task(disparar_notificacoes_emergencia, novo_alerta, request.emergency_number)
+
+    novo_alerta.notificacoes_enviadas = True
+    await db.commit()
+
     return {"status": "SOS_ATIVO", "alerta_id": novo_alerta.id, "mensagem": "Rede de apoio acionada."}
 
 

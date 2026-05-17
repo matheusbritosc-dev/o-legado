@@ -39,6 +39,12 @@ function LoginContent() {
         throw new Error(errorMsg);
       }
 
+      const data = await res.json();
+      // Salva o JWT token para uso em chamadas autenticadas
+      if (data.access_token) {
+        localStorage.setItem("legado_token", data.access_token);
+      }
+
       router.push("/dashboard");
       router.refresh();
 

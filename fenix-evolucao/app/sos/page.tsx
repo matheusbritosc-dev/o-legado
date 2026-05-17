@@ -99,10 +99,22 @@ export default function SOSPage() {
       }
 
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
-      fetch(`${apiUrl}/seguranca/sos`, {
+      const emergencyNumber = localStorage.getItem("legado_emergency_number") || "";
+      const token = localStorage.getItem("legado_token");
+
+      // Usa endpoint público (sem JWT) para garantir que funciona sempre
+      const endpoint = token ? `${apiUrl}/seguranca/sos` : `${apiUrl}/seguranca/sos-publico`;
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+
+      fetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ latitude: lat ?? null, longitude: lon ?? null }),
+        headers,
+        body: JSON.stringify({ 
+          latitude: lat ?? null, 
+          longitude: lon ?? null,
+          emergency_number: emergencyNumber
+        }),
       })
       .then((res) => {
         if (!res.ok) throw new Error("API falhou");

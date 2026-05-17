@@ -9,8 +9,8 @@ class InteracaoIA(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     
-    # ForeignKey to users model
-    usuario_id = Column(UUID(as_uuid=True), ForeignKey("evolucao.usuarios_pais.id", ondelete="CASCADE"), nullable=False)
+    # ForeignKey to users model (nullable para interações via WhatsApp sem login)
+    usuario_id = Column(UUID(as_uuid=True), ForeignKey("evolucao.usuarios_pais.id", ondelete="CASCADE"), nullable=True)
     
     # Criptografado com AES-256 no nível da aplicação antes de salvar
     pergunta_criptografada = Column(Text, nullable=False)

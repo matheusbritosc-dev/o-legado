@@ -9,7 +9,7 @@ class AlertaSeguranca(Base):
     __tablename__ = "alertas_seguranca"
 
     id = Column(PG_UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    usuario_id = Column(PG_UUID(as_uuid=True), ForeignKey("usuarios_pais.id"), nullable=False, index=True)
+    usuario_id = Column(PG_UUID(as_uuid=True), ForeignKey("usuarios_pais.id"), nullable=True, index=True)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     precisao_metros = Column(Float, nullable=True)

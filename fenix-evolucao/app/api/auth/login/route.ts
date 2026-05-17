@@ -1,45 +1,39 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+const API_URL = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
+export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json();
+    const body = await request.json();
 
-    if (!email || !password) {
+    // O frontend envia {email, password}, o backend espera {email, senha}
+    const backendPayload = {
+      email: body.email,
+      senha: body.password,
+    };
+
+    const res = await fetch(`${API_URL}/api/v1/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(backendPayload),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
       return NextResponse.json(
-        { error: "E-mail e senha são obrigatórios." },
-        { status: 400 }
+        { error: data.detail || "E-mail ou senha incorretos." },
+        { status: res.status }
       );
     }
 
-    // MODO DEMO — Acesso instantâneo sem esperar backend
-    const demoToken = Buffer.from(
-      JSON.stringify({
-        sub: "demo-user-001",
-        email: email,
-        mode: "demo",
-        exp: Math.floor(Date.now() / 1000) + 86400,
-      })
-    ).toString("base64");
-
-    const response = NextResponse.json(
-      { success: true, mode: "demo" },
-      { status: 200 }
-    );
-
-    response.cookies.set({
-      name: "legado_token",
-      value: `demo.${demoToken}`,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 60 * 24,
-    });
-
-    return response;
-
+    // Retorna o token para o frontend salvar no localStorage
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("Login route error:", error);
-    return NextResponse.json({ error: "Erro interno do servidor" }, { status: 500 });
+    console.error("Erro no proxy de login:", error);
+    return NextResponse.json(
+      { error: "Erro ao conectar com o servidor." },
+      { status: 500 }
+    );
   }
 }

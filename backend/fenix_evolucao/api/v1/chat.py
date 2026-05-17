@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from services.ai_service import consultar_conselheiro_stream
@@ -16,19 +16,8 @@ async def chat_seguro_stream(
     current_user: UsuarioPai = Depends(get_current_user)
 ):
     """
-    Endpoint de Chat Seguro (E2EE/Zero-Cloud).
-    Retorna uma Server-Sent-Events (SSE) response em streaming do Conselheiro do Legado.
-    O consumo é auditado localmente mas o conteúdo é efêmero neste endpoint para não deixar rastros na rede.
+    Endpoint de Chat Seguro com RAG jurídico real.
+    A busca semântica acontece dentro do ai_service automaticamente.
     """
-    
-    # 1. Recuperação RAG Mock
-    # Na implementação completa, buscaríamos documentos no ChromaDB via LlamaIndex/LangChain Retriever.
-    contexto_recuperado = "Documento #P01: Cartilha de Proteção e Direitos. 'Mulheres em situação de vulnerabilidade têm direito a medidas protetivas e sigilo absoluto de local de acolhimento.'"
-    
-    # 2. Inicia o stream local via Ollama (Nemotron)
-    generator = consultar_conselheiro_stream(
-        pergunta=request.pergunta,
-        contexto_rag=contexto_recuperado
-    )
-    
+    generator = consultar_conselheiro_stream(pergunta=request.pergunta)
     return StreamingResponse(generator, media_type="text/event-stream")
