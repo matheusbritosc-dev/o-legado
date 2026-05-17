@@ -15,6 +15,9 @@ async def lifespan(app: FastAPI):
     async with engine.begin() as conn:
         await conn.execute(text("CREATE SCHEMA IF NOT EXISTS evolucao"))
         await conn.run_sync(Base.metadata.create_all)
+    # Pré-calcula embeddings da base de conhecimento (1 chamada, cacheada em disco)
+    from services.embedding_service import embedding_service
+    await embedding_service.inicializar()
     yield
 
 app = FastAPI(

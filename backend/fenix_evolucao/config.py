@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     # IA e Integrações
     OLLAMA_BASE_URL: Optional[str] = None
     OLLAMA_MODEL: Optional[str] = "nemotron"
+    OPENAI_API_KEY: Optional[str] = None
     
     # Pagamentos (Mercado Pago PIX)
     MP_ACCESS_TOKEN: Optional[str] = None
