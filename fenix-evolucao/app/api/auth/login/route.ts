@@ -6,16 +6,10 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // O frontend envia {email, password}, o backend espera {email, senha}
-    const backendPayload = {
-      email: body.email,
-      senha: body.password,
-    };
-
     const res = await fetch(`${API_URL}/api/v1/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(backendPayload),
+      body: JSON.stringify(body),
     });
 
     const data = await res.json();
@@ -27,7 +21,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Retorna o token para o frontend salvar no localStorage
     return NextResponse.json(data);
   } catch (error) {
     console.error("Erro no proxy de login:", error);
