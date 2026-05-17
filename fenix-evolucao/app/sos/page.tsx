@@ -92,9 +92,10 @@ export default function SOSPage() {
 
   const sendAlert = () => {
     setSending(true);
-    const doSend = (lat?: number, lon?: number) => {
+    const doSend = async (lat?: number, lon?: number) => {
       if (!navigator.onLine) {
         fallbackToSMS(lat, lon);
+        setSending(false);
         return;
       }
 
@@ -107,24 +108,28 @@ export default function SOSPage() {
       const headers: Record<string, string> = { "Content-Type": "application/json" };
       if (token) headers["Authorization"] = `Bearer ${token}`;
 
-      fetch(endpoint, {
-        method: "POST",
-        headers,
-        body: JSON.stringify({ 
-          latitude: lat ?? null, 
-          longitude: lon ?? null,
-          emergency_number: emergencyNumber
-        }),
-      })
-      .then((res) => {
-        if (!res.ok) throw new Error("API falhou");
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers,
+          body: JSON.stringify({ 
+            latitude: lat ?? null, 
+            longitude: lon ?? null,
+            emergency_number: emergencyNumber
+          }),
+        });
+
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+
         setSent(true);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Falha no servidor, caindo pro SMS manual", err);
         fallbackToSMS(lat, lon);
-      })
-      .finally(() => { setSending(false); });
+      } finally {
+        setSending(false);
+      }
     };
 
     if ("geolocation" in navigator) {
