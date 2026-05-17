@@ -192,15 +192,34 @@ async def _salvar_interacao(telefone: str, pergunta: str, resposta: str, tipo: s
     """Salva a interação no banco usando uma sessão independente."""
     try:
         import hashlib
+        import uuid
+        from sqlalchemy import select
         from models.interacao_ia import InteracaoIA
+        from models.usuario_pai import UsuarioPai
 
         hash_anonimo = hashlib.sha256(telefone.encode()).hexdigest()
 
         async with AsyncSessionLocal() as db:
+            # 1. Busca usuário pelo telefone
+            result = await db.execute(select(UsuarioPai).where(UsuarioPai.telefone == telefone))
+            usuario = result.scalar_one_or_none()
+
+            # 2. Se não existir, cria usuário anônimo
+            if not usuario:
+                usuario = UsuarioPai(
+                    nome="Usuária WhatsApp (Anônima)",
+                    email=f"anon_{uuid.uuid4().hex[:8]}@whatsapp.legado",
+                    telefone=telefone,
+                    senha_hash="no_password_whatsapp_only"
+                )
+                db.add(usuario)
+                await db.commit()
+                await db.refresh(usuario)
+                logger.info(f"👤 Novo usuário anônimo criado para o número {telefone}")
+
+            # 3. Salva a interação vinculada ao usuário
             interacao = InteracaoIA(
-                # Sem usuario_id por enquanto (usuária não autenticada via WhatsApp)
-                # Usamos o hash anônimo para rastrear sem identificar
-                usuario_id=None,
+                usuario_id=usuario.id,
                 pergunta_criptografada=pergunta,  # TODO: criptografar com AES-256
                 resposta_criptografada=resposta,
                 hash_anonimo=hash_anonimo,
@@ -209,7 +228,7 @@ async def _salvar_interacao(telefone: str, pergunta: str, resposta: str, tipo: s
             )
             db.add(interacao)
             await db.commit()
-            logger.info(f"💾 Interação salva (hash: {hash_anonimo[:12]}..., tipo: {tipo})")
+            logger.info(f"💾 Interação salva (usuario_id: {usuario.id}, tipo: {tipo})")
 
     except Exception as e:
         # Não falhar o webhook por erro de persistência
